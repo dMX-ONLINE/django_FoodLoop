@@ -1,0 +1,150 @@
+.view-image-page {    min-height: 90vh;
+    padding: 50px 20px 70px;
+    background: linear-gradient(
+        135deg,
+        #f4fff7 0%,
+        #ffffff 50%,
+        #fff8ef 100%
+    );
+}
+
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin: 30px;
+    padding: 10px 18px;
+    color: #198754;
+    background: #ffffff;
+    border: 1px solid #d9eee1;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s ease;
+}
+
+.back-link:hover {
+    color: #ffffff;
+    background: #198754;
+    border-color: #198754;
+
+    transform: translateX(-4px);
+}
+
+
+/* =========================
+   IMAGE CONTAINER
+========================= */
+
+.large-food-image-container {
+    width: 100%;
+    max-width: 1200px;
+
+    margin: 30px auto;
+
+    padding: 12px;
+
+    background: #ffffff;
+
+    border-radius: 24px;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.12);
+
+    position: relative;
+}
+
+
+/* =========================
+   BIG FOOD IMAGE
+========================= */
+
+img {
+    display: block;
+    width: 100%;
+    border-radius: 18px;
+    transition: transform 0.4s ease;
+}
+
+.food-big-image:hover {
+    transform: scale(1.01);
+}
+
+
+/* =========================
+   ORANGE ACCENT
+========================= */
+
+.view-image-page::after {
+    content: "";
+
+    display: block;
+
+    width: 80px;
+    height: 5px;
+
+    margin: 40px auto 0;
+
+    background: #f28c28;
+
+    border-radius: 10px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 768px) {
+
+    .view-image-page {
+        padding: 30px 15px 50px;
+    }
+
+    .food-big-image {
+        height: 450px;
+
+        border-radius: 14px;
+    }
+
+    .image-container {
+        padding: 8px;
+
+        border-radius: 18px;
+    }
+
+    .view-image-info h1 {
+        font-size: 1.7rem;
+    }
+
+    .no-image {
+        height: 400px;
+    }
+}
+
+
+/* =========================
+   SMALL PHONES
+========================= */
+
+@media (max-width: 480px) {
+
+    .food-big-image {
+        height: 320px;
+    }
+
+    .back-link {
+        font-size: 14px;
+        padding: 8px 14px;
+    }
+
+    .view-image-info h1 {
+        font-size: 1.4rem;
+    }
+
+    .no-image {
+        height: 300px;
+    }
+}

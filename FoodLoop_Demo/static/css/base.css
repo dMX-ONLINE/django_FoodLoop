@@ -1,0 +1,606 @@
+:root {
+    --fl-green: #2e7d32;
+    --fl-green-dark: #1b5e20;
+    --fl-green-light: #e8f5e9;
+    --fl-orange: #f97316;
+    --fl-orange-light: #fff3e6;
+    --fl-text: #1f2937;
+    --fl-muted: #6b7280;
+    --fl-border: #e5e7eb;
+    --fl-bg: #f7f8f7;
+    --fl-imager: linear-gradient(135deg, var(--footer-green) 0%, var(--fl-green) 60%, #1b5938 100%);
+    --fl-white: #ffffff;
+    --fl-radius: 16px;
+    --fl-shadow: 0 6px 24px rgba(27, 94, 32, 0.08);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    color: var(--fl-text);
+    background: var(--fl-bg);
+    line-height: 1.6;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+}
+
+/* =========================
+   NAVBAR
+========================== */
+.foodloop-navbar {
+    box-shadow: 0 2px 12px rgba(27, 94, 32, 0.08);
+    padding: 0.9rem 0;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.223);
+    border: 1px solid rgba(245, 245, 245, 0.426);
+    border-radius: 0px 0px 30px 30px;
+}
+
+.foodloop-navbar .container {
+    display: flex;
+    align-items: center;
+    gap: 6rem;
+}
+
+.foodloop-logo {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--fl-green-dark);
+    text-decoration: none;
+    display: inline-block;
+    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.381);
+}
+
+.foodloop-logo span {
+    color: var(--fl-orange);
+}
+
+.foodloop-nav {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    list-style: none;
+    margin-left: auto;
+}
+
+.foodloop-nav-link {
+    color: black;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.4rem 0.2rem;
+    border-bottom: 2px solid transparent;
+    transition: 0.15s ease;
+}
+
+.foodloop-nav-link:hover,
+.foodloop-nav-link.active {
+    color: var(--fl-green);
+    text-shadow: 1px 0px 1px orange;
+    border-bottom-color: var(--fl-orange);
+}
+
+.btn-foodloop {
+    background: var(--fl-green);
+    color: var(--fl-white);
+    font-weight: 600;
+    padding: 0.55rem 1.4rem;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 0.92rem;
+    transition: 0.2s ease;
+    display: inline-block;
+}
+
+.btn-foodloop:hover {
+    background: var(--fl-green-dark);
+    transform: translateY(-2px);
+}
+
+/* Hamburger (hidden on desktop) */
+.foodloop-toggler {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.4rem;
+    margin-left: auto;
+}
+
+.foodloop-toggler span {
+    display: block;
+    width: 24px;
+    height: 3px;
+    background: var(--fl-green-dark);
+    border-radius: 2px;
+    transition: 0.25s ease;
+}
+
+.foodloop-toggler.open span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.foodloop-toggler.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.foodloop-toggler.open span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+.profiler{
+    padding-left: 2rem;
+    display: flex;
+    align-items: center;
+    
+}
+.profiler-avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--fl-green), var(--fl-orange));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-right: 10px;
+    border: 4px solid var(--fl-white);
+    box-shadow: 0 0 0 5px var(--fl-green-light);
+}
+
+.profiler-avatar span,
+.profiler-avatar img {
+    font-size: 2.6rem;
+    font-weight: 700;
+    color: var(--fl-white);
+}
+
+.profiler-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.imager{
+    border: 2px solid var(--fl-green);
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    margin-right: 5px;
+}
+
+/* =========================
+   RESPONSIVE NAVBAR
+========================== */
+
+@media (max-width: 992px) {
+    .foodloop-footer-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+
+@media (max-width: 768px) {
+    .foodloop-navbar {
+        width: 100%;
+        padding: 0.8rem 0;
+        border-radius: 0 0 22px 22px;
+    }
+
+    .foodloop-navbar .container {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 0;
+    }
+
+    .foodloop-logo {
+        font-size: 1.35rem;
+    }
+
+    /* Hamburger button */
+    .foodloop-toggler {
+        display: flex;
+        flex-shrink: 0;
+        margin-left: auto;
+        position: relative;
+        z-index: 2;
+    }
+
+    /* Navigation is hidden until the menu is opened */
+    .foodloop-nav {
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        flex: 0 0 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0.75rem 0 0.25rem;
+        list-style: none;
+        border-top: 1px solid rgba(46, 125, 50, 0.12);
+        margin-top: 0.8rem;
+    }
+
+    /* Support either class name used by the menu JavaScript */
+    .foodloop-nav.open,
+    .foodloop-nav.active {
+        display: flex;
+    }
+
+    .foodloop-nav li {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+
+    .foodloop-nav-link {
+        display: flex;
+        align-items: center;
+        background: #ffffff41;
+        margin: 5px 0px;
+        width: 100%;
+        padding: 0.8rem 0.9rem;
+        border: 0;
+        border-radius: 10px;
+        color: black;
+        font-size: 0.96rem;
+        text-decoration: none;
+        transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .foodloop-nav-link:hover,
+    .foodloop-nav-link.active {
+        background: var(--fl-green);
+        color: var(--fl-white);
+        border-bottom-color: transparent;
+    }
+
+    .foodloop-nav-link i {
+        width: 1.6rem;
+        margin-right: 0.55rem;
+        text-align: center;
+        color: var(--fl-green);
+    }
+
+    /* Offer-food buttons inside the mobile menu */
+    .foodloop-nav .btn-foodloop,
+    .foodloop-nav li .btn-foodloop {
+        display: block;
+        width: 100%;
+        margin-top: 0.45rem;
+        padding: 0.75rem 1rem;
+        text-align: center;
+    }
+
+    /* Keep profile content from pushing the navbar out of shape */
+    .profiler {
+        padding-left: 0;
+        margin-top: 0.5rem;
+    }
+}
+
+/* =========================
+   DESKTOP NAVBAR SAFETY
+========================== */
+@media (min-width: 769px) {
+    .foodloop-nav {
+        display: flex;
+    }
+
+    .foodloop-toggler {
+        display: none;
+    }
+}
+
+/* =========================
+    FOOTER
+========================== */
+
+
+.foodloop-footer {
+    --footer-green: #1b5938;
+    --footer-green-light: #1b5938;
+    --footer-orange: #f97316;
+    --footer-text: #d1ddd5;
+    --footer-muted: #a5b8ab;
+    background: linear-gradient(135deg, var(--footer-green) 0%, var(--fl-green) 60%, #1b5938 100%);
+    color: var(--footer-text);
+    margin-top: 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+.foodloop-footer-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 0.9fr 1.1fr;
+    gap: 45px;
+    padding: 60px 0;
+}
+
+.footer-brand {
+    grid-column: span 1;
+}
+
+.footer-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.footer-logo > span:last-child {
+    color: var(--footer-orange);
+    margin-left: -10px;
+}
+
+.footer-logo .logo-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: var(--footer-orange);
+    color: #ffffff;
+    font-size: 1.1rem;
+}
+
+.footer-brand > p {
+    max-width: 340px;
+    color: var(--footer-muted);
+    font-size: 0.92rem;
+    line-height: 1.9;
+    margin-bottom: 25px;
+}
+
+
+/* Impact statement */
+
+.footer-impact {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 25px 0;
+}
+
+.impact-icon {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: rgba(249, 115, 22, 0.13);
+    color: #ff9b53;
+    font-size: 1.2rem;
+}
+
+.footer-impact strong,
+.footer-impact small {
+    display: block;
+}
+
+.footer-impact strong {
+    color: #ffffff;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.footer-impact small {
+    color: var(--footer-muted);
+    font-size: 0.78rem;
+    line-height: 1.5;
+}
+
+
+/* =========================
+   FOOTER LINKS
+========================= */
+
+.footer-column h5 {
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 800;
+    margin: 7px 0 24px;
+    position: relative;
+}
+
+.footer-column h5::after {
+    content: "";
+    display: block;
+    width: 32px;
+    height: 3px;
+    border-radius: 5px;
+    background: var(--footer-orange);
+    margin-top: 12px;
+}
+
+.foodloop-footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.foodloop-footer-links li {
+    margin-bottom: 15px;
+}
+
+.foodloop-footer-links a {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 9px;
+    color: var(--footer-muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    transition: color 0.2s, transform 0.2s;
+}
+
+.foodloop-footer-links a i {
+    color: var(--footer-orange);
+    font-size: 0.65rem;
+    margin-top: 6px;
+}
+
+.foodloop-footer-links a:hover {
+    color: #ffffff;
+    transform: translateX(4px);
+}
+
+
+/* =========================
+   SOCIAL LINKS
+========================= */
+
+.footer-socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.footer-socials a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #ffffff;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.footer-socials a:hover {
+    background: var(--footer-orange);
+    transform: translateY(-3px);
+}
+
+
+/* =========================
+   FOOTER BOTTOM
+========================= */
+
+.foodloop-footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 18px;
+    padding: 25px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.foodloop-footer-bottom p {
+    margin: 0;
+    color: var(--footer-muted);
+    font-size: 0.82rem;
+    line-height: 1.7;
+}
+
+.footer-bottom-message i {
+    color: var(--footer-orange);
+    margin-right: 5px;
+}
+
+.back-to-top{
+    background-color: linear-gradient(135deg, var(--footer-green) 0%, var(--fl-green) 60%, #1b5938 100%);;
+    border: 1px solid #ffffff6a;
+    color: white;
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 10px;
+    border-radius: 30px;
+    line-height: 1.7;
+    animation: lift 4s ease-in-out infinite;
+}
+
+@keyframes lift {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+.back-to-top:hover {
+    color: #ff9b53;
+}
+
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+@media (max-width: 1100px) {
+    .foodloop-footer-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 40px;
+    }
+
+    .footer-newsletter {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+}
+
+@media (max-width: 600px) {
+    .foodloop-footer {
+        margin-top: 50px;
+    }
+
+    .footer-newsletter {
+        padding: 40px 0;
+    }
+
+    .footer-newsletter-form {
+        grid-template-columns: 1fr;
+    }
+
+    .footer-newsletter-form button {
+        width: 100%;
+    }
+
+    .foodloop-footer-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding: 40px 0;
+    }
+
+    .footer-brand > p {
+        max-width: 100%;
+    }
+
+    .footer-column h5 {
+        margin-bottom: 18px;
+    }
+
+    .foodloop-footer-bottom {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 22px 0;
+    }
+}

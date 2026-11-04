@@ -1,0 +1,291 @@
+    <!-- =========================
+             REVIEWS
+        ==========================
+
+        <section
+            class="reviews-section"
+            id="reviews"
+        >
+
+            <div class="reviews-header">
+
+                <div>
+
+                    <span class="section-label">
+                        Customer Reviews
+                    </span>
+
+                    <h2>
+                        What people say
+                    </h2>
+
+                    <p>
+                        Reviews from customers who collected
+                        this food.
+                    </p>
+
+                </div>
+
+
+                <div class="overall-rating">
+
+                    <strong>
+                        4.8
+                    </strong>
+
+                    <div>
+
+                        <div class="stars">
+                            ★★★★★
+                        </div>
+
+                        <span>
+                            24 reviews
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 REVIEW FORM
+            ========================== 
+
+            {% if user.is_authenticated %}
+
+            <div class="review-form-card">
+
+                <h3>
+                    Share your experience
+                </h3>
+
+                <p>
+                    Only customers who have completed a pickup
+                    should review this food.
+                </p>
+
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+
+                    <div class="rating-input">
+
+                        <label>
+                            Your Rating
+                        </label>
+
+                        <div class="rating-stars">
+
+                            <input
+                                type="radio"
+                                name="rating"
+                                id="star5"
+                                value="5"
+                            >
+                            <label for="star5">★</label>
+
+                            <input
+                                type="radio"
+                                name="rating"
+                                id="star4"
+                                value="4"
+                            >
+                            <label for="star4">★</label>
+
+                            <input
+                                type="radio"
+                                name="rating"
+                                id="star3"
+                                value="3"
+                            >
+                            <label for="star3">★</label>
+
+                            <input
+                                type="radio"
+                                name="rating"
+                                id="star2"
+                                value="2"
+                            >
+                            <label for="star2">★</label>
+
+                            <input
+                                type="radio"
+                                name="rating"
+                                id="star1"
+                                value="1"
+                            >
+                            <label for="star1">★</label>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="review-input">
+
+                        <label for="review">
+                            Your Review
+                        </label>
+
+                        <textarea
+                            id="review"
+                            name="review"
+                            rows="4"
+                            placeholder="Tell other FoodLoop users about your experience..."
+                        ></textarea>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="submit-review"
+                    >
+                        Submit Review
+                    </button>
+
+                </form>
+
+            </div>
+
+            {% endif %}
+
+
+            <!-- =========================
+                 REVIEW LIST
+            ========================== -->
+
+            <div class="review-list">
+
+
+                <article class="review-card">
+
+                    <div class="review-user">
+
+                        <div class="review-avatar">
+                            T
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Tunde
+                            </strong>
+
+                            <span>
+                                Verified pickup
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="review-content">
+
+                        <div class="review-top">
+
+                            <div class="stars">
+                                ★★★★★
+                            </div>
+
+                            <span>
+                                2 days ago
+                            </span>
+
+                        </div>
+
+                        <p>
+                            The food was fresh and the pickup
+                            process was very easy.
+                        </p>
+
+                    </div>
+
+                </article>
+
+
+                <article class="review-card">
+
+                    <div class="review-user">
+
+                        <div class="review-avatar">
+                            A
+                        </div>
+
+                        <div>
+
+                            <strong>
+                                Amaka
+                            </strong>
+
+                            <span>
+                                Verified pickup
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="review-content">
+
+                        <div class="review-top">
+
+                            <div class="stars">
+                                ★★★★☆
+                            </div>
+
+                            <span>
+                                5 days ago
+                            </span>
+
+                        </div>
+
+                        <p>
+                            Good value for the price. The provider
+                            was also very helpful.
+                        </p>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             FOODLOOP NOTICE
+        ========================== -->
+
+        <div class="foodloop-notice">
+
+            <div class="notice-icon">
+                ♻️
+            </div>
+
+            <div>
+
+                <h2>
+                    Every reservation helps reduce food waste.
+                </h2>
+
+                <p>
+                    FoodLoop connects surplus food with people
+                    who can use it. Remember, FoodLoop does not
+                    provide delivery — customers collect their food
+                    from the provider.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>

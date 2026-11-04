@@ -1,0 +1,416 @@
+
+.offer-food {
+    background: #f7faf7;
+    padding: 60px 0 80px;
+    min-height: calc(100vh - 150px);
+}
+
+
+/* =========================================
+   HEADER
+   ========================================= */
+
+.offer-header {
+    max-width: 760px;
+    margin: 0 auto 45px;
+    text-align: center;
+    padding: 3rem 0 5.5rem;
+}
+
+.offer-label {
+    display: inline-block;
+    color: #f28c28;
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.offer-header h1 {
+    color: #14532d;
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 15px;
+}
+
+.offer-header p {
+    color: #667085;
+    font-size: 17px;
+    line-height: 1.7;
+    margin: 0;
+}
+
+
+/* =========================================
+   MAIN LAYOUT
+   ========================================= */
+
+.offer-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 30px;
+    align-items: start;
+}
+
+
+/* =========================================
+   FORM CARD
+   ========================================= */
+
+.offer-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 18px;
+    padding: 35px;
+    box-shadow: 0 8px 30px rgba(20, 83, 45, 0.07);
+}
+
+
+/* =========================================
+   FORM SECTIONS
+   ========================================= */
+
+.form-section {
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.form-section:last-of-type {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 10px;
+}
+
+.form-section h2 {
+    color: #14532d;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.section-description {
+    color: #667085;
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+
+/* =========================================
+   FORM GROUP
+   ========================================= */
+
+.form-group {
+    margin-bottom: 22px;
+}
+
+.form-group:last-child {
+    margin-bottom: 0;
+}
+
+.form-group label {
+    display: block;
+    color: #344054;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+
+/* =========================================
+   INPUTS
+   ========================================= */
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    border: 1px solid #d0d5dd;
+    border-radius: 10px;
+    padding: 13px 14px;
+    font-size: 15px;
+    color: #101828;
+    background: #ffffff;
+    outline: none;
+    transition: 0.2s ease;
+    box-sizing: border-box;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #98a2b3;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #198754;
+    box-shadow: 0 0 0 3px rgba(25, 135, 84, 0.12);
+}
+
+
+/* =========================================
+   TWO-COLUMN FORM ROW
+   ========================================= */
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+
+/* =========================================
+   PRICE INPUT
+   ========================================= */
+
+.input-with-symbol {
+    position: relative;
+}
+
+.input-with-symbol span {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #667085;
+    font-weight: 600;
+    pointer-events: none;
+}
+
+.input-with-symbol input {
+    padding-left: 34px;
+}
+
+
+/* =========================================
+   IMAGE UPLOAD
+   ========================================= */
+
+.image-upload {
+    border: 2px dashed #cbd5ce;
+    border-radius: 14px;
+    background: #f8fbf8;
+    padding: 35px 20px;
+    text-align: center;
+    transition: 0.2s ease;
+}
+
+.image-upload:hover {
+    border-color: #198754;
+    background: #f1f8f3;
+}
+
+.image-upload label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.image-upload input {
+    display: none;
+}
+
+.upload-icon {
+    width: 55px;
+    height: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff3e8;
+    border-radius: 50%;
+    font-size: 25px;
+    margin-bottom: 12px;
+}
+
+.image-upload strong {
+    color: #14532d;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.image-upload span {
+    color: #98a2b3;
+    font-size: 13px;
+}
+
+
+/* =========================================
+   FORM ACTIONS
+   ========================================= */
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+
+/* =========================================
+   BUTTONS
+   ========================================= */
+
+.btn-offer-primary,
+.btn-offer-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 46px;
+    padding: 0 22px;
+    border-radius: 9px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.btn-offer-primary {
+    border: 1px solid #198754;
+    background: #198754;
+    color: #ffffff;
+}
+
+.btn-offer-primary:hover {
+    background: #146c43;
+    border-color: #146c43;
+    color: #ffffff;
+}
+
+.btn-offer-outline {
+    border: 1px solid #d0d5dd;
+    background: #ffffff;
+    color: #344054;
+}
+
+.btn-offer-outline:hover {
+    border-color: #198754;
+    color: #198754;
+}
+
+
+/* =========================================
+   INFORMATION SIDEBAR
+   ========================================= */
+
+.offer-info {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.info-card {
+    background: #ffe6cc;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    padding: 24px;
+}
+
+.info-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff3e8;
+    border-radius: 12px;
+    font-size: 22px;
+    margin-bottom: 16px;
+}
+
+.info-card h2 {
+    color: #14532d;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.info-card p {
+    color: #667085;
+    font-size: 14px;
+    line-height: 1.7;
+    margin: 0;
+}
+
+
+/* =========================================
+   RESPONSIVE DESIGN
+   ========================================= */
+
+@media (max-width: 991px) {
+
+    .offer-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .offer-info {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+}
+
+
+@media (max-width: 767px) {
+
+    .offer-food {
+        padding: 40px 0 60px;
+    }
+
+    .offer-header h1 {
+        font-size: 32px;
+    }
+
+    .offer-header p {
+        font-size: 15px;
+    }
+
+    .offer-card {
+        padding: 24px;
+        border-radius: 14px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .offer-info {
+        grid-template-columns: 1fr;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+    }
+
+    .btn-offer-primary,
+    .btn-offer-outline {
+        width: 100%;
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .offer-header h1 {
+        font-size: 28px;
+    }
+
+    .offer-card {
+        padding: 18px;
+    }
+
+    .form-section h2 {
+        font-size: 19px;
+    }
+
+}

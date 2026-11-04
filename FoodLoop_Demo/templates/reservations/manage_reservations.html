@@ -1,0 +1,305 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Manage Reservations - FoodLoop
+{% endblock %}
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/manage_reservations.css' %}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="manage-page">
+
+    <div class="container">
+
+        <!-- =========================
+             PAGE HEADER
+        ========================== -->
+
+        <div class="manage-header">
+
+            <span class="manage-label">
+                Food Provider
+            </span>
+
+            <h1>
+                Manage Reservations
+            </h1>
+
+            <p>
+                Review reservation requests from customers
+                and manage the food you have offered.
+            </p>
+
+        </div>
+
+
+        <!-- =========================
+             SUMMARY
+        ========================== -->
+
+        <div class="reservation-summary">
+
+            <div class="summary-box">
+
+                <span class="summary-number">
+                   {{ pending_count| default:'0' }}
+                </span>
+
+                <span class="summary-title">
+                    Pending
+                </span>
+
+            </div>
+
+
+            <div class="summary-box">
+
+                <span class="summary-number">
+                   
+                   {{ accepted_count| default:'0' }}
+                </span>
+
+                <span class="summary-title">
+                    Accepted
+                </span>
+
+            </div>
+
+
+            <div class="summary-box">
+
+                <span class="summary-number">
+                    {{ refused_count| default:'0' }}
+                </span>
+
+                <span class="summary-title">
+                    Rejected
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             FILTERS
+        ========================== -->
+
+        <div class="manage-filters">
+
+            <a href="{% url 'reservations:manage_reservations' %}"
+               class="manage-filter {% if not selected_status %}active{% endif %}">
+                All
+            </a>
+
+            <a href="?status=pending"
+               class="manage-filter {% if selected_status == 'pending' %}active{% endif %}">
+                Pending
+            </a>
+
+            <a href="?status=accepted"
+               class="manage-filter {% if selected_status == 'accepted' %}active{% endif %}">
+                Accepted
+            </a>
+
+            <a href="?status=refused"
+               class="manage-filter {% if selected_status == 'refused' %}active{% endif %}">
+                Rejected
+            </a>
+
+        </div>
+
+
+        <!-- =========================
+             RESERVATION REQUESTS
+        ========================== -->
+
+        <div class="reservation-list">
+
+            {% for reservation in reservations %}
+                {% with food=reservation.food %}
+
+                <article class="reservation-request">
+
+                    <!-- CUSTOMER -->
+
+                    <div class="customer-section">
+
+                        <div class="customer-avatar">
+                           {{ reservation.customer.username|first|upper }}
+                        </div>
+
+                        <div>
+
+                            <span class="request-label">
+                                Customer
+                            </span>
+
+                            <h2>
+                                {% if reservation.customer.get_full_name %}
+                                    {{ reservation.customer.get_full_name }}
+                                {% else %}
+                                    {{ reservation.customer.username }}
+                                {% endif %}
+                            </h2>
+
+                            <p>
+                                {{ reservation.customer.email }}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- FOOD -->
+
+                    <div class="request-food">
+
+                        <span class="request-label">
+                            Food
+                        </span>
+
+                        <h3>
+                            {{ food.title }}
+                        </h3>
+
+                        <p>
+                            {{ reservation.quantity }} requested
+                        </p>
+
+                    </div>
+
+
+                    <!-- AMOUNT -->
+
+                    <div class="request-amount">
+
+                        <span class="request-label">
+                            Total
+                        </span>
+
+                        <strong>
+                           ₦{{ food.price|floatformat:2 }}
+                        </strong>
+
+                    </div>
+
+
+                    <!-- STATUS -->
+
+                    <div class="request-status">
+
+                        <span class="request-label">
+                            Status
+                        </span>
+
+                        <span class="status {{ reservation.status }}">
+                            {{ reservation.get_status_display }}
+                        </span>
+
+                    </div>
+
+
+                    <!-- ACTIONS -->
+
+                    <div class="request-actions">
+
+                        {% if reservation.status == 'pending' %}
+
+                            <form
+                                method="POST"
+                                action="{% url 'reservations:reservation_action' reservation.pk %}"
+                            >
+
+                                {% csrf_token %}
+
+                                <button
+                                    type="submit"
+                                    name="action"
+                                    value="accept"
+                                    class="accept-button"
+                                >
+                                    Accept
+                                </button>
+
+                                <button
+                                    type="submit"
+                                    name="action"
+                                    value="refuse"
+                                    class="reject-button"
+                                >
+                                    Reject
+                                </button>
+
+                            </form>
+                        {% elif reservation.status == 'accepted' %}
+
+                            <span class="status accepted">
+                                Accepted
+                            </span>
+
+                        {% elif reservation.status == 'refused' %}
+
+                            <span class="status refused">
+                                Rejected
+                            </span>
+
+                        {% endif %}
+                    </div>
+                    <!-- REQUEST DATE -->
+
+                    <div class="request-date">
+                        <small>
+                            Requested:
+                            {{ reservation.created_at|date:"M d, Y" }}
+                        </small>
+                    </div>
+
+                </article>
+
+            {% endwith %}
+
+
+        <!-- =========================
+             EMPTY STATE
+        ========================== -->
+
+        {% empty %}
+
+        <div class="empty-state">
+
+            <div class="empty-icon">
+                📦
+            </div>
+
+            <h2>
+                No reservation requests
+            </h2>
+
+            <p>
+                When customers reserve your food,
+                their requests will appear here.
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+
+</section>
+
+{% endblock %}
+

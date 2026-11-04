@@ -1,0 +1,365 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Edit Profile - FoodLoop
+{% endblock %}
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/edit_profile.css' %}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="edit-profile-page">
+
+    <div class="container">
+
+        <!-- =========================
+             PAGE HEADER
+        ========================== -->
+
+        <div class="edit-profile-header">
+
+            <a
+                href="{% url 'accounts:profile' %}"
+                class="back-link"
+            >
+                ← Back to Profile
+            </a>
+
+            <span class="profile-label">
+                Account Settings
+            </span>
+
+            <h1>
+                Edit Your Profile
+            </h1>
+
+            <p>
+                Keep your FoodLoop profile information up to date.
+            </p>
+
+        </div>
+
+
+        <!-- =========================
+             PROFILE FORM
+        ========================== -->
+
+        <div class="edit-profile-layout">
+
+
+            <!-- MAIN FORM -->
+
+            <div class="edit-profile-card">
+
+                <form
+                    method="POST"
+                    enctype="multipart/form-data"
+                >
+
+                    {% csrf_token %}
+
+
+                    <!-- =========================
+                         PROFILE PHOTO
+                    ========================== -->
+
+                    
+                    
+                <div class="profile-photo-section">
+                
+                    <div class="current-avatar">
+                        {% if profile.avatar %}
+                            <img
+                                src="{{ profile.avatar.url }}"
+                                alt="{{ user.username }} profile picture"
+                            >
+                        {% else %}
+                            {{ user.username|first|upper }}
+                        {% endif %}
+                    </div>
+                
+                    <div class="photo-content">
+                        <h3>Profile Photo</h3>
+                    
+                        <p>
+                            Add a photo to help other FoodLoop users recognize you.
+                        </p>
+                    
+                        <label
+                            for="{{ profile_form.avatar.id_for_label }}"
+                            class="upload-button"
+                        >
+                            Change Photo
+                        </label>
+                    
+                        {{ profile_form.avatar }}
+                    
+                        {% if profile_form.avatar.errors %}
+                            <div class="form-error">
+                                {{ profile_form.avatar.errors }}
+                            </div>
+                        {% endif %}
+                    </div>
+                
+                </div>
+
+
+
+                    <!-- =========================
+                         PERSONAL INFORMATION
+                    ========================== -->
+
+                    <div class="form-section">
+
+                        <div class="section-heading">
+
+                            <h2>
+                                Personal Information
+                            </h2>
+
+                            <p>
+                                Update your basic account information.
+                            </p>
+
+                        </div>
+
+
+                        <div class="form-row">
+
+
+                            <!-- FIRST NAME -->
+
+                            <div class="form-group">
+
+                                <label for="first-name">
+                                    First Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="first-name"
+                                    name="first_name"
+                                    value="{{ user.first_name }}"
+                                    placeholder="Enter your first name"
+                                >
+
+                            </div>
+
+
+                            <!-- LAST NAME -->
+
+                            <div class="form-group">
+
+                                <label for="last-name">
+                                    Last Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="last-name"
+                                    name="last_name"
+                                    value="{{ user.last_name }}"
+                                    placeholder="Enter your last name"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- USERNAME -->
+
+                        <div class="form-group">
+
+                            <label for="username">
+                                Username
+                            </label>
+
+                            <input
+                                type="text"
+                                id="username"
+                                name="username"
+                                value="{{ user.username }}"
+                                placeholder="Enter your username"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- EMAIL -->
+
+                        <div class="form-group">
+
+                            <label for="email">
+                                Email Address
+                            </label>
+
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                value="{{ user.email }}"
+                                placeholder="Enter your email"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =========================
+                         CONTACT INFORMATION
+                    ========================== -->
+
+                    <div class="form-section">
+
+                        <div class="section-heading">
+
+                            <h2>
+                                Contact Information
+                            </h2>
+
+                            <p>
+                                Add contact details for your FoodLoop activity.
+                            </p>
+
+                        </div>
+
+
+                        <!-- PHONE -->
+
+                        <div class="form-group">
+
+                            <label for="phone_number">
+                                Phone Number
+                            </label>
+
+                            <input
+                                type="tel"
+                                id="phone_number"
+                                name="phone_number"
+                                value="{{ profile.phone_number }}"
+                                placeholder="e.g. 08012345678"
+                            >
+
+                        </div>
+
+
+                        <!-- ADDRESS -->
+
+                        <div class="form-group">
+
+                            <label for="address">
+                                Pickup Address
+                            </label>
+
+                            <textarea
+                                id="pickup_address"
+                                name="pickup_address"
+                                rows="4"
+                                placeholder="Enter your pickup address"
+                            >{{ profile.pick_address }}</textarea>
+
+                            <span class="field-help">
+                                This can be used when you offer food
+                                for pickup.
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =========================
+                         FORM ACTIONS
+                    ========================== -->
+
+                    <div class="form-actions">
+
+                        <a
+                            href="{% url 'accounts:profile' %}"
+                            class="btn-profile-cancel"
+                        >
+                            Cancel
+                        </a>
+
+                        <button
+                            type="submit"
+                            class="btn-profile-save"
+                        >
+                            Save Changes
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+            <!-- =========================
+                 SIDEBAR
+            ========================== -->
+
+            <aside class="edit-profile-sidebar">
+
+                <div class="sidebar-card">
+
+                    <div class="sidebar-icon">
+                        🔒
+                    </div>
+
+                    <h2>
+                        Keep Your Account Secure
+                    </h2>
+
+                    <p>
+                        Make sure your account information is
+                        accurate and keep your password private.
+                    </p>
+
+                    <a href="#">
+                        Change Password
+                    </a>
+
+                </div>
+
+
+                <div class="sidebar-card">
+
+                    <div class="sidebar-icon">
+                        📍
+                    </div>
+
+                    <h2>
+                        Pickup Information
+                    </h2>
+
+                    <p>
+                        Your pickup address helps when you are
+                        offering surplus food on FoodLoop.
+                    </p>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
+

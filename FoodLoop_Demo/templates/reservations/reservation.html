@@ -1,0 +1,569 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Reserve Food - FoodLoop
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/reservations.css' %}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="reservation-page">
+
+    <div class="container">
+
+        <!-- =========================
+             BACK LINK
+        ========================== -->
+
+        <a
+            href="{% url 'marketplace:viewfood' food.id%}"
+            class="reservation-back"
+        >
+            ← Back to Food
+        </a>
+
+
+        <!-- =========================
+             PAGE HEADER
+        ========================== -->
+
+        <div class="reservation-header">
+
+            <span class="reservation-label">
+                Food Reservation
+            </span>
+
+            <h1>
+                Reserve Your Food
+            </h1>
+
+            <p>
+                Confirm your reservation and pickup details.
+            </p>
+
+        </div>
+
+
+        <!-- =========================
+             RESERVATION LAYOUT
+        ========================== -->
+
+        <div class="reservation-layout">
+
+
+            <!-- =========================
+                 FOOD INFORMATION
+            ========================== -->
+
+            <div class="reservation-food-card">
+
+                <div class="reservation-food-image">
+
+                    {% if food.image %}
+
+                        <img
+                            src="{{ food.image.url }}"
+                            alt="{{ food.title }}"
+                        >
+
+                    {% else %}
+
+                        <div class="reservation-image-placeholder">
+                            🍱
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="reservation-food-details">
+
+                    <span class="food-category">
+                        {{ food.category }}
+                    </span>
+
+                    <h2>
+                        {{ food.title }}
+                    </h2>
+
+                    <p>
+                        {{ food.description }}
+                    </p>
+
+
+                    <div class="food-provider-info">
+
+                        <div class="provider-avatar">
+                            {{ food.provider.username|first|upper }}
+                        </div>
+
+                        <div>
+
+                            <small>
+                                Food Provider
+                            </small>
+
+                            <strong>
+                                {{ food.provider.username }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- =========================
+                 RESERVATION FORM
+            ========================== -->
+
+            <div class="reservation-form-card">
+
+                <div class="form-card-header">
+
+                    <h2>
+                        Reservation Details
+                    </h2>
+
+                    <span>
+                        Pickup only
+                    </span>
+
+                </div>
+
+
+                <form
+                    method="POST"
+                    action=""
+                    class="reservation-form"
+                >
+
+                    {% csrf_token %}
+
+
+                    <!-- =========================
+                         QUANTITY
+                    ========================== -->
+
+                    <div class="reservation-field">
+
+                        <label for="quantity">
+                            Quantity
+                        </label>
+
+                        <div class="quantity-control">
+
+                            <button
+                                type="button"
+                                id="decreaseQuantity"
+                            >
+                                −
+                            </button>
+
+                            <input
+                                type="number"
+                                id="quantity"
+                                name="quantity"
+                                value="1"
+                                min="1"
+                                max="{{ food.quantity }}"
+                            >
+
+                            <button
+                                type="button"
+                                id="increaseQuantity"
+                            >
+                                +
+                            </button>
+
+                        </div>
+
+                        <small>
+                            {{ food.quantity }} available
+                        </small>
+
+                    </div>
+
+
+                    <!-- =========================
+                         PICKUP LOCATION
+                    ========================== -->
+
+                    <div class="reservation-field">
+
+                        <label>
+                            Pickup Location
+                        </label>
+
+                        <div class="reservation-info-box">
+
+                            <span class="info-icon">
+                                📍
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    {{ food.location }}
+                                </strong>
+
+                                <small>
+                                    You are responsible for
+                                    collecting your reservation.
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =========================
+                         PICKUP TIME
+                    ========================== -->
+
+                    <div class="reservation-field">
+
+                        <label>
+                            Pickup Window
+                        </label>
+
+                        <div class="reservation-info-box">
+
+                            <span class="info-icon">
+                                🕐
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    {{ food.expiry_time }}
+                                </strong>
+
+                                <small>
+                                    Please collect your food
+                                    before the expiry time.
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- =========================
+                         EXPIRY
+                    ========================== -->
+
+                    <div class="reservation-warning">
+
+                        <span>
+                            ⚠️
+                        </span>
+
+                        <p>
+                            This food is available for a limited
+                            time. Make sure you can pick it up
+                            before it expires.
+                        </p>
+
+                    </div>
+
+
+                    <!-- =========================
+                         TOTAL
+                    ========================== -->
+
+                    <div class="reservation-total">
+
+                        <span>
+                            Total
+                        </span>
+
+                        <strong id="reservationTotal">
+                            ₦{{ food.price }}
+                        </strong>
+
+                    </div>
+
+
+                    <!-- =========================
+                         CONFIRM BUTTON
+                    ========================== -->
+
+                    <button
+                        type="submit"
+                        class="confirm-reservation-button"
+                    >
+                        Reserve Food
+                    </button>
+
+
+                    <p class="reservation-note">
+                        Your reservation will initially be marked
+                        as <strong>Pending</strong>. The food provider
+                        must accept your reservation before pickup.
+                    </p>
+
+                </form>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             RESERVATION PROCESS
+        ========================== -->
+
+        <section class="reservation-process">
+
+            <div class="process-header">
+
+                <span>
+                    HOW IT WORKS
+                </span>
+
+                <h2>
+                    What happens after you reserve?
+                </h2>
+
+            </div>
+
+
+            <div class="process-grid">
+
+
+                <!-- STEP 1 -->
+
+                <div class="process-card">
+
+                    <div class="process-number">
+                        1
+                    </div>
+
+                    <h3>
+                        Request Sent
+                    </h3>
+
+                    <p>
+                        Your reservation is created with a
+                        <strong>Pending</strong> status.
+                    </p>
+
+                </div>
+
+
+                <!-- STEP 2 -->
+
+                <div class="process-card">
+
+                    <div class="process-number">
+                        2
+                    </div>
+
+                    <h3>
+                        Provider Responds
+                    </h3>
+
+                    <p>
+                        The food provider can accept or cancel
+                        your reservation.
+                    </p>
+
+                </div>
+
+
+                <!-- STEP 3 -->
+
+                <div class="process-card">
+
+                    <div class="process-number">
+                        3
+                    </div>
+
+                    <h3>
+                        Pick Up Food
+                    </h3>
+
+                    <p>
+                        If accepted, visit the specified location
+                        and collect your food.
+                    </p>
+
+                </div>
+
+
+                <!-- STEP 4 -->
+
+                <div class="process-card">
+
+                    <div class="process-number">
+                        4
+                    </div>
+
+                    <h3>
+                        Complete & Review
+                    </h3>
+
+                    <p>
+                        After pickup, the reservation becomes
+                        <strong>Completed</strong> and you can
+                        leave a review.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             IMPORTANT NOTICE
+        ========================== -->
+
+        <div class="reservation-notice">
+
+            <div class="notice-icon">
+                ♻️
+            </div>
+
+            <div>
+
+                <h3>
+                    FoodLoop is not a delivery service
+                </h3>
+
+                <p>
+                    FoodLoop connects you with surplus food.
+                    You are responsible for collecting your
+                    reservation from the pickup location provided
+                    by the food provider.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     QUANTITY JAVASCRIPT
+========================= -->
+
+<script>
+
+    const quantityInput =
+        document.getElementById("quantity");
+
+    const decreaseButton =
+        document.getElementById("decreaseQuantity");
+
+    const increaseButton =
+        document.getElementById("increaseQuantity");
+
+    const totalDisplay =
+        document.getElementById("reservationTotal");
+
+
+    const foodPrice =
+        Number("{{ food.price }}");
+
+
+    function updateTotal() {
+
+        let quantity =
+            Number(quantityInput.value);
+
+        if (quantity < 1) {
+            quantity = 1;
+            quantityInput.value = 1;
+        }
+
+        totalDisplay.textContent =
+            "₦" + (foodPrice * quantity).toLocaleString();
+
+    }
+
+
+    decreaseButton.addEventListener(
+        "click",
+        function () {
+
+            let quantity =
+                Number(quantityInput.value);
+
+            if (quantity > 1) {
+
+                quantity--;
+
+                quantityInput.value =
+                    quantity;
+
+                updateTotal();
+
+            }
+
+        }
+    );
+
+
+    increaseButton.addEventListener(
+        "click",
+        function () {
+
+            let quantity =
+                Number(quantityInput.value);
+
+            const maxQuantity =
+                Number(quantityInput.max);
+
+
+            if (quantity < maxQuantity) {
+
+                quantity++;
+
+                quantityInput.value =
+                    quantity;
+
+                updateTotal();
+
+            }
+
+        }
+    );
+
+
+    quantityInput.addEventListener(
+        "input",
+        updateTotal
+    );
+
+
+    updateTotal();
+
+</script>
+
+{% endblock %}
+

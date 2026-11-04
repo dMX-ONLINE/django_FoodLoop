@@ -1,0 +1,255 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    My Reservations - FoodLoop
+{% endblock %}
+
+{% block extra_css %}
+<link
+    rel="stylesheet"
+    href="{% static 'css/my_dashboard.css' %}"
+>
+{% endblock %}
+
+
+{% block content %}
+
+<section class="dashboard-page">
+
+    <div class="container">
+
+        <!-- HEADER -->
+
+        <div class="dashboard-header">
+
+            <span class="dashboard-label">
+                Customer
+            </span>
+
+            <h1>
+                My Reservations
+            </h1>
+
+            <p>
+                View and track the surplus food you have reserved.
+            </p>
+
+        </div>
+
+
+        <!-- FILTERS -->
+
+        <div class="dashboard-filters">
+
+            <a href="{% url 'accounts:my_reservations' %}"
+               class="filter {% if not selected_status %}active{% endif %}">
+                All
+            </a>
+
+            <a href="?status=pending"
+               class="filter {% if selected_status == 'pending' %}active{% endif %}">
+                Pending
+            </a>
+
+            <a href="?status=accepted"
+               class="filter {% if selected_status == 'accepted' %}active{% endif %}">
+                Accepted
+            </a>
+
+            <a href="?status=refused"
+               class="filter {% if selected_status == 'refused' %}active{% endif %}">
+                Rejected
+            </a>
+
+        </div>
+
+
+        <!-- RESERVATIONS -->
+
+        <div class="dashboard-list">
+
+            {% for reservation in reservations %}
+
+                {% with food=reservation.food %}
+
+                <article class="dashboard-card">
+
+                    <!-- FOOD IMAGE -->
+                    <div class='reservation-imageholder'>
+                        {% if food.image %}
+
+                            <img
+                                src="{{ food.image.url }}"
+                                alt="{{ food.title }}"
+                            >
+
+                        {% else %}
+
+                            <div class="food-placeholder">
+                                🍱
+                            </div>
+
+                        {% endif %}
+
+                    </div>
+                    <div class="dashboard-card-content">
+
+                        <!-- CATEGORY AND STATUS -->
+
+                        <div class="card-top">
+
+                            <span class="food-category">
+                                {{ food.category }}
+                            </span>
+
+                            <span class="status {{ reservation.status }}">
+                                {{ reservation.get_status_display }}
+                            </span>
+
+                        </div>
+
+
+                        <!-- FOOD INFORMATION -->
+
+                        <h2>
+                            {{ food.title }}
+                        </h2>
+
+                        <p>
+                            {{ food.description|truncatewords:20 }}
+                        </p>
+
+
+                        <!-- RESERVATION DETAILS -->
+
+                        <div class="reservation-details">
+
+                            <div>
+                                <small>
+                                    Quantity Reserved
+                                </small>
+
+                                <strong>
+                                    {{ reservation.quantity }}
+                                </strong>
+                            </div>
+
+
+                            <div>
+                                <small>
+                                    Price Per Unit
+                                </small>
+
+                                <strong>
+                                    ₦{{ food.price|floatformat:2 }}
+                                </strong>
+                            </div>
+
+
+                            <div>
+                                <small>
+                                    Pickup Location
+                                </small>
+                            
+                                <strong>
+                                    {% if food.location %}
+                                        {{ food.location.city|default:food.location.address }}
+                                    {% else %}
+                                        Location not provided
+                                    {% endif %}
+                                </strong>
+                            </div>
+
+                        </div>
+
+
+                        <!-- RESERVATION FOOTER -->
+
+                        <div class="card-footer">
+
+                            <span class="date">
+                                Reserved on
+                                {{ reservation.created_at|date:"M d, Y" }}
+                            </span>
+
+                            <a
+                                href="{% url 'marketplace:viewfood' food.pk %}"
+                                class="dashboard-button"
+                            >
+                                View Food
+                            </a>
+
+                        </div>
+
+
+                        <!-- PROVIDER RESPONSE -->
+
+                        {% if reservation.status == 'pending' %}
+
+                            <p class="reservation-message">
+                                Your reservation is waiting for the
+                                provider's approval.
+                            </p>
+
+                        {% elif reservation.status == 'accepted' %}
+
+                            <p class="reservation-message">
+                                Your reservation has been accepted.
+                                Please contact the provider or follow
+                                the pickup instructions.
+                            </p>
+
+                        {% elif reservation.status == 'refused' %}
+
+                            <p class="reservation-message">
+                                Unfortunately, the provider declined
+                                this reservation.
+                            </p>
+
+                        {% endif %}
+
+                    </div>
+
+                </article>
+
+                {% endwith %}
+
+            {% empty %}
+
+                <!-- EMPTY STATE -->
+
+                <div class="empty-state">
+
+                    <div class="empty-icon">
+                        🍽️
+                    </div>
+
+                    <h2>
+                        No reservations yet
+                    </h2>
+
+                    <p>
+                        Find surplus food near you and make
+                        your first reservation.
+                    </p>
+
+                    <a
+                        href="{% url 'marketplace:marketplace' %}"
+                        class="dashboard-button"
+                    >
+                        Find Food
+                    </a>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

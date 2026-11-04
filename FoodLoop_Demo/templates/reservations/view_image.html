@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    {{ food.title }} - FoodLoop
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/view_image.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="food-image-page">
+
+    <a
+        href="{% url 'marketplace:marketplace' %}"
+        class="back-link"
+    >
+        ← Back to Marketplace
+    </a>
+
+    <div class="large-food-image-container">
+
+        {% if food.image %}
+
+            <img
+                src="{{ food.image.url }}"
+                alt="{{ food.title }}"
+                class="large-food-image"
+            >
+
+        {% else %}
+
+            <div class="no-food-image">
+                🍱
+                <h2>No Image Available</h2>
+            </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,436 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Marketplace - FoodLoop
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/offerfood.css' %}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="offer-food">
+
+    <div class="container">
+
+        <!-- HEADER -->
+
+        <div class="offer-header">
+
+            <span class="offer-label">
+                FoodLoop
+            </span>
+
+            <h1>
+                Offer Surplus Food
+            </h1>
+
+            <p>
+                Have extra food? List it on FoodLoop and
+                help someone enjoy it instead of letting it go to waste.
+            </p>
+
+        </div>
+
+
+        <!-- FORM -->
+
+        <div class="offer-layout">
+
+
+            <!-- FORM CARD -->
+
+            <div class="offer-card">
+
+                <form
+                    method="POST"
+                    enctype="multipart/form-data"
+                >
+
+                    {% csrf_token %}
+
+
+                    <!-- FOOD INFORMATION -->
+
+                    <div class="form-section">
+
+                        <h2>
+                            Food Information
+                        </h2>
+
+                        <p class="section-description">
+                            Tell people what food you are offering.
+                        </p>
+
+
+                        <!-- TITLE -->
+
+                        <div class="form-group">
+
+                            <label for="food-title">
+                                Food Title
+                            </label>
+
+                            <input
+                                type="text"
+                                id="food-title"
+                                name="title"
+                                placeholder="e.g. Jollof Rice"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- DESCRIPTION -->
+
+                        <div class="form-group">
+
+                            <label for="description">
+                                Description
+                            </label>
+
+                            <textarea
+                                id="description"
+                                name="description"
+                                rows="5"
+                                placeholder="Describe the food, portion size, condition, ingredients, etc."
+                                required
+                            ></textarea>
+
+                        </div>
+
+
+                        <!-- CATEGORY -->
+
+                        <div class="form-group">
+
+                            <label for="category">
+                                Category
+                            </label>
+
+                            <select
+                                id="category"
+                                name="category"
+                                required
+                            >
+
+                                <option value="">
+                                    Select a category
+                                </option>
+
+                                <option value="cooked">
+                                    Cooked Meals
+                                </option>
+
+                                <option value="bakery">
+                                    Bakery
+                                </option>
+
+                                <option value="produce">
+                                    Fresh Produce
+                                </option>
+
+                                <option value="beverages">
+                                    Beverages
+                                </option>
+
+                                <option value="snacks">
+                                    Snacks
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PRICE & QUANTITY -->
+
+                    <div class="form-section">
+
+                        <h2>
+                            Price & Quantity
+                        </h2>
+
+                        <p class="section-description">
+                            Tell customers how much food is available.
+                        </p>
+
+
+                        <div class="form-row">
+
+
+                            <!-- PRICE -->
+
+                            <div class="form-group">
+
+                                <label for="price">
+                                    Price per Unit
+                                </label>
+
+                                <div class="input-with-symbol">
+
+                                    <span>
+                                        ₦
+                                    </span>
+
+                                    <input
+                                        type="number"
+                                        id="price"
+                                        name="price"
+                                        placeholder="1500"
+                                        min="0"
+                                        required
+                                    >
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- QUANTITY -->
+
+                            <div class="form-group">
+
+                                <label for="quantity">
+                                    Quantity Available
+                                </label>
+
+                                <input
+                                    type="number"
+                                    id="quantity"
+                                    name="quantity"
+                                    placeholder="20"
+                                    min="1"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PICKUP INFORMATION -->
+
+                    <div class="form-section">
+
+                        <h2>
+                            Pickup Information
+                        </h2>
+
+                        <p class="section-description">
+                            Customers will collect the food from this location.
+                        </p>
+
+
+                        <!-- LOCATION -->
+
+                        <div class="form-group">
+
+                            <label for="pickup-location">
+                                Pickup Location
+                            </label>
+
+                            <input
+                                type="text"
+                                id="pickup-location"
+                                name="pickup_location"
+                                placeholder="e.g. Ajah, Lagos"
+                                required
+                            >
+
+                        </div>
+
+
+                        <!-- PICKUP TIME -->
+
+                        <div class="form-row">
+
+
+                            <div class="form-group">
+
+                                <label for="pickup-start">
+                                    Pickup Starts
+                                </label>
+
+                                <input
+                                    type="datetime-local"
+                                    id="pickup-start"
+                                    name="pickup_start"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="form-group">
+
+                                <label for="expiry-time">
+                                    Available Until
+                                </label>
+
+                                <input
+                                    type="datetime-local"
+                                    id="expiry-time"
+                                    name="expiry_time"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- IMAGE -->
+
+                    <div class="form-section">
+
+                        <h2>
+                            Food Image
+                        </h2>
+
+                        <p class="section-description">
+                            Add a clear photo so customers can see what you are offering.
+                        </p>
+
+
+                        <div class="image-upload">
+
+                            <label for="food-image">
+
+                                <div class="upload-icon">
+                                    📷
+                                </div>
+
+                                <strong>
+                                    Upload Food Image
+                                </strong>
+
+                                <span>
+                                    PNG, JPG or JPEG
+                                </span>
+
+                            </label>
+
+                            <input
+                                type="file"
+                                id="food-image"
+                                name="image"
+                                accept="image/png,image/jpeg"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- ACTIONS -->
+
+                    <div class="form-actions">
+
+                        <a
+                            href="{% url 'marketplace:marketplace' %}"
+                            class="btn-offer-outline"
+                        >
+                            Cancel
+                        </a>
+
+                        <button
+                            type="submit"
+                            class="btn-offer-primary"
+                        >
+                            Publish Food
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+
+            <!-- INFORMATION CARD -->
+
+            <aside class="offer-info">
+
+                <div class="info-card">
+
+                    <div class="info-icon">
+                        ♻️
+                    </div>
+
+                    <h2>
+                        Reduce Food Waste
+                    </h2>
+
+                    <p>
+                        Your surplus food could help someone
+                        while preventing perfectly good food
+                        from going to waste.
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <div class="info-icon">
+                        📍
+                    </div>
+
+                    <h2>
+                        Pickup Only
+                    </h2>
+
+                    <p>
+                        FoodLoop does not provide delivery.
+                        Customers are responsible for collecting
+                        their reserved food.
+                    </p>
+
+                </div>
+
+
+                <div class="info-card">
+
+                    <div class="info-icon">
+                        ⏰
+                    </div>
+
+                    <h2>
+                        Set an Accurate Expiry
+                    </h2>
+
+                    <p>
+                        Make sure your pickup and expiry times
+                        are accurate so customers know when
+                        they need to collect their food.
+                    </p>
+
+                </div>
+
+            </aside>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
+

@@ -1,0 +1,1249 @@
+
+.view-food-page {
+    min-height: calc(100vh - 150px);
+    padding: 50px 0 80px;
+    background: #f7faf7;
+}
+
+
+/* =========================================
+   BACK LINK
+   ========================================= */
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 30px;
+    margin-top: 40px;
+    color: #14532d;
+    font-size: 14px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition: 0.2s ease;
+}
+
+.back-link:hover {
+    color: #f28c28;
+}
+
+
+/* =========================================
+   MAIN FOOD LAYOUT
+   ========================================= */
+
+.food-details-layout {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, 1fr);
+
+    gap: 55px;
+
+    align-items: start;
+}
+
+
+/* =========================================
+   FOOD IMAGE
+   ========================================= */
+
+.food-image-container {
+    width: 100%;
+    min-height: 520px;
+    overflow: hidden;
+    background: #eaf2ec;
+    border-radius: 22px;
+}
+
+.food-main-image {
+    display: block;
+    width: 100%;
+    height: 520px;
+    object-fit: cover;
+}
+
+.food-image-placeholder {
+    width: 100%;
+    height: 520px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #fff1e4;
+
+    font-size: 100px;
+}
+
+
+/* =========================================
+   FOOD DETAILS
+   ========================================= */
+
+.food-details {
+    padding-top: 5px;
+    width: 100%;
+}
+
+.food-category {
+    display: inline-block;
+
+    padding: 7px 13px;
+
+    background: #e7f4eb;
+
+    color: #198754;
+
+    border-radius: 30px;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+
+    margin-bottom: 14px;
+}
+
+.food-details h1 {
+    color: #14532d;
+
+    font-size: 42px;
+    line-height: 1.15;
+
+    font-weight: 800;
+
+    margin: 0 0 12px;
+}
+
+
+/* =========================================
+   RATING
+   ========================================= */
+
+.food-rating {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    margin-bottom: 20px;
+
+    color: #667085;
+
+    font-size: 14px;
+}
+
+.stars {
+    color: #f28c28;
+
+    font-size: 17px;
+    letter-spacing: 1px;
+}
+
+.food-rating a {
+    color: #198754;
+
+    font-weight: 600;
+
+    text-decoration: none;
+}
+
+.food-rating a:hover {
+    color: #f28c28;
+}
+
+
+/* =========================================
+   PRICE
+   ========================================= */
+
+.food-price {
+    display: flex;
+    align-items: baseline;
+
+    gap: 8px;
+
+    margin-bottom: 28px;
+
+    color: #f28c28;
+
+    font-size: 34px;
+    font-weight: 800;
+}
+
+.food-price small {
+    color: #667085;
+
+    font-size: 13px;
+    font-weight: 400;
+}
+
+
+/* =========================================
+   DESCRIPTION
+   ========================================= */
+
+.food-description {
+    padding-bottom: 25px;
+
+    margin-bottom: 25px;
+
+    border-bottom: 1px solid #e2e8e3;
+}
+
+.food-description h2 {
+    color: #14532d;
+
+    font-size: 19px;
+    font-weight: 700;
+
+    margin-bottom: 10px;
+}
+
+.food-description p {
+    color: #667085;
+
+    font-size: 15px;
+    line-height: 1.8;
+
+    margin: 0;
+}
+
+
+/* =========================================
+   FOOD INFORMATION
+   ========================================= */
+
+.food-info-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 14px;
+
+    margin-bottom: 25px;
+}
+
+.food-info-item {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 15px;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 12px;
+}
+
+.info-icon {
+    width: 42px;
+    height: 42px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #fff1e4;
+
+    border-radius: 10px;
+
+    font-size: 19px;
+}
+
+.food-info-item small {
+    display: block;
+
+    color: #98a2b3;
+
+    font-size: 11px;
+
+    margin-bottom: 3px;
+}
+
+.food-info-item strong {
+    display: block;
+
+    color: #344054;
+
+    font-size: 13px;
+}
+
+
+/* =========================================
+   PROVIDER
+   ========================================= */
+
+.food-provider {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    padding: 18px 0;
+
+    border-top: 1px solid #e2e8e3;
+    border-bottom: 1px solid #e2e8e3;
+}
+
+.provider-avatar {
+    width: 50px;
+    height: 50px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #198754;
+
+    color: #ffffff;
+
+    border-radius: 50%;
+
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.provider-details {
+    flex: 1;
+}
+
+.provider-details small {
+    display: block;
+
+    color: #98a2b3;
+
+    font-size: 11px;
+
+    margin-bottom: 3px;
+}
+
+.provider-details strong {
+    display: block;
+
+    color: #14532d;
+
+    font-size: 15px;
+
+    margin-bottom: 2px;
+}
+
+.provider-rating {
+    color: #f28c28;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.provider-link {
+    color: #198754;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    text-decoration: none;
+}
+
+.provider-link:hover {
+    color: #f28c28;
+}
+
+
+/* =========================================
+   RESERVATION BOX
+   ========================================= */
+
+.reserve-food-btn {
+    width: 100%;
+    margin-top: 25px;
+    padding: 15px;
+    background: #2e7d32;
+    color: white;
+    border: 2px solid orange;
+    border-radius: 30px;
+    box-shadow: 0 5px 20px rgba(20, 83, 45, 0.05);
+    transition: transform 0.3s ease;
+}
+.reserve-food-btn:hover {
+    transform: translateY(-10px);
+    background: #1b5e20;
+    box-shadow: 0 5px 20px rgba(25, 135, 84, 0.1);
+}
+
+
+/* =========================================
+   QUANTITY
+   ========================================= */
+
+.reservation-form label {
+    display: block;
+
+    color: #344054;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    margin-bottom: 8px;
+}
+
+.reservation-action {
+    display: flex;
+
+    gap: 12px;
+}
+
+.quantity-control {
+    display: flex;
+
+    width: 135px;
+    height: 46px;
+
+    flex-shrink: 0;
+
+    border: 1px solid #d0d5dd;
+
+    border-radius: 9px;
+
+    overflow: hidden;
+}
+
+.quantity-control button {
+    width: 38px;
+
+    border: none;
+
+    background: #f7faf7;
+
+    color: #14532d;
+
+    font-size: 20px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.quantity-control button:hover {
+    background: #e7f4eb;
+}
+
+.quantity-control input {
+    width: 59px;
+
+    border: none;
+
+    border-left: 1px solid #e5e7eb;
+    border-right: 1px solid #e5e7eb;
+
+    text-align: center;
+
+    color: #344054;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    outline: none;
+}
+
+
+/* =========================================
+   PRIMARY BUTTON
+   ========================================= */
+
+.btn-food-primary {
+    min-height: 46px;
+
+    flex: 1;
+
+    border: 1px solid #198754;
+
+    border-radius: 9px;
+
+    background: #198754;
+
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.btn-food-primary:hover {
+    background: #146c43;
+
+    border-color: #146c43;
+}
+
+
+/* =========================================
+   RESERVATION TOTAL
+   ========================================= */
+
+.reservation-total {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-top: 18px;
+
+    padding-top: 15px;
+
+    border-top: 1px solid #e5e7eb;
+}
+
+.reservation-total span {
+    color: #667085;
+
+    font-size: 14px;
+}
+
+.reservation-total strong {
+    color: #14532d;
+
+    font-size: 20px;
+    font-weight: 800;
+}
+
+
+/* =========================================
+   PICKUP NOTICE
+   ========================================= */
+
+.pickup-notice {
+    color: #667085;
+
+    font-size: 12px;
+    line-height: 1.6;
+
+    margin: 13px 0 0;
+}
+
+
+/* =========================================
+   OWNER
+   ========================================= */
+
+.owner-message strong {
+    display: block;
+
+    color: #14532d;
+
+    font-size: 15px;
+
+    margin-bottom: 5px;
+}
+
+.owner-message p {
+    color: #667085;
+
+    font-size: 13px;
+
+    margin-bottom: 15px;
+}
+
+.owner-actions {
+    display: flex;
+
+    gap: 10px;
+}
+
+.btn-food-outline {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 46px;
+
+    padding: 0 20px;
+
+    border: 1px solid #d0d5dd;
+
+    border-radius: 9px;
+
+    background: #ffffff;
+
+    color: #344054;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    transition: 0.2s ease;
+}
+
+.btn-food-outline:hover {
+    border-color: #198754;
+
+    color: #198754;
+}
+
+
+/* =========================================
+   SOLD OUT
+   ========================================= */
+
+.sold-out {
+    padding: 8px 0;
+
+    text-align: center;
+}
+
+.sold-out strong {
+    display: block;
+
+    color: #b42318;
+
+    font-size: 15px;
+
+    margin-bottom: 5px;
+}
+
+.sold-out p {
+    color: #667085;
+
+    font-size: 13px;
+
+    margin: 0;
+}
+
+
+/* =========================================
+   REVIEWS SECTION
+   ========================================= */
+
+.reviews-section {
+    margin-top: 90px;
+
+    padding-top: 65px;
+
+    border-top: 1px solid #dfe8e1;
+}
+
+.reviews-header {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+
+    margin-bottom: 35px;
+}
+
+.section-label {
+    display: block;
+
+    color: #f28c28;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+
+    margin-bottom: 8px;
+}
+
+.reviews-header h2 {
+    color: #14532d;
+
+    font-size: 32px;
+    font-weight: 800;
+
+    margin-bottom: 7px;
+}
+
+.reviews-header p {
+    color: #667085;
+
+    font-size: 14px;
+
+    margin: 0;
+}
+
+
+/* =========================================
+   OVERALL RATING
+   ========================================= */
+
+.overall-rating {
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    padding: 18px 22px;
+
+    background: #ffffff;
+
+    border: 1px solid #e2e8e3;
+
+    border-radius: 14px;
+}
+
+.overall-rating > strong {
+    color: #14532d;
+
+    font-size: 38px;
+    line-height: 1;
+
+    font-weight: 800;
+}
+
+.overall-rating .stars {
+    font-size: 14px;
+}
+
+.overall-rating span {
+    display: block;
+
+    color: #98a2b3;
+
+    font-size: 11px;
+
+    margin-top: 3px;
+}
+
+
+/* =========================================
+   REVIEW FORM
+   ========================================= */
+
+.review-form-card {
+    margin-bottom: 35px;
+
+    padding: 28px;
+
+    background: #ffffff;
+
+    border: 1px solid #dfe8e1;
+
+    border-radius: 16px;
+}
+
+.review-form-card h3 {
+    color: #14532d;
+
+    font-size: 20px;
+    font-weight: 700;
+
+    margin-bottom: 5px;
+}
+
+.review-form-card > p {
+    color: #667085;
+
+    font-size: 13px;
+
+    margin-bottom: 22px;
+}
+
+
+/* =========================================
+   RATING INPUT
+   ========================================= */
+
+.rating-input {
+    margin-bottom: 20px;
+}
+
+.rating-input > label,
+.review-input > label {
+    display: block;
+
+    color: #344054;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    margin-bottom: 8px;
+}
+
+.rating-stars {
+    display: flex;
+
+    flex-direction: row-reverse;
+
+    justify-content: flex-end;
+
+    width: fit-content;
+}
+
+.rating-stars input {
+    display: none;
+}
+
+.rating-stars label {
+    color: #d0d5dd;
+
+    font-size: 27px;
+
+    cursor: pointer;
+
+    transition: 0.15s ease;
+}
+
+.rating-stars label:hover,
+.rating-stars label:hover ~ label,
+.rating-stars input:checked ~ label {
+    color: #f28c28;
+}
+
+
+/* =========================================
+   REVIEW TEXTAREA
+   ========================================= */
+
+.review-input textarea {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    min-height: 120px;
+
+    padding: 13px 14px;
+
+    border: 1px solid #d0d5dd;
+
+    border-radius: 9px;
+
+    resize: vertical;
+
+    color: #101828;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition: 0.2s ease;
+}
+
+.review-input textarea::placeholder {
+    color: #98a2b3;
+}
+
+.review-input textarea:focus {
+    border-color: #198754;
+
+    box-shadow:
+        0 0 0 3px rgba(25, 135, 84, 0.1);
+}
+
+
+/* =========================================
+   SUBMIT REVIEW
+   ========================================= */
+
+.submit-review {
+    min-height: 45px;
+
+    margin-top: 17px;
+
+    padding: 0 22px;
+
+    border: 1px solid #198754;
+
+    border-radius: 9px;
+
+    background: #198754;
+
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.submit-review:hover {
+    background: #146c43;
+
+    border-color: #146c43;
+}
+
+
+/* =========================================
+   REVIEW LIST
+   ========================================= */
+
+.review-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+.review-card {
+    display: grid;
+
+    grid-template-columns: 180px 1fr;
+
+    gap: 25px;
+
+    padding: 24px;
+
+    background: #ffffff;
+
+    border: 1px solid #e3e8e4;
+
+    border-radius: 15px;
+}
+
+
+/* =========================================
+   REVIEW USER
+   ========================================= */
+
+.review-user {
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+}
+
+
+.profile-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--fl-green), var(--fl-orange));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 4px solid var(--fl-white);
+    box-shadow: 0 0 0 4px var(--fl-green-light);
+}
+
+.profile-avatar span,
+.profile-avatar img {
+    font-size: 2.6rem;
+    font-weight: 700;
+    color: var(--fl-white);
+}
+
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* =========================================
+   REVIEW CONTENT
+   ========================================= */
+
+.review-top {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 8px;
+}
+
+.review-top .stars {
+    font-size: 14px;
+}
+
+.review-top > span {
+    color: #98a2b3;
+
+    font-size: 11px;
+}
+
+.review-content p {
+    color: #667085;
+
+    font-size: 14px;
+    line-height: 1.7;
+
+    margin: 0;
+}
+
+
+/* =========================================
+   FOODLOOP NOTICE
+   ========================================= */
+
+.foodloop-notice {
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+
+    margin-top: 55px;
+
+    padding: 27px 30px;
+
+    background: #14532d;
+
+    border-radius: 18px;
+}
+
+.notice-icon {
+    width: 55px;
+    height: 55px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f28c28;
+
+    border-radius: 12px;
+
+    font-size: 25px;
+}
+
+.foodloop-notice h2 {
+    color: #ffffff;
+
+    font-size: 19px;
+    font-weight: 700;
+
+    margin-bottom: 6px;
+}
+
+.foodloop-notice p {
+    max-width: 850px;
+
+    color: #dcebe0;
+
+    font-size: 13px;
+    line-height: 1.7;
+
+    margin: 0;
+}
+
+
+/* =========================================
+   TABLET
+   ========================================= */
+
+@media (max-width: 991px) {
+
+    .food-details-layout {
+        grid-template-columns: 1fr;
+
+        gap: 35px;
+    }
+
+    .food-image-container {
+        min-height: 420px;
+    }
+
+    .food-main-image,
+    .food-image-placeholder {
+        height: 420px;
+    }
+
+    .reviews-header {
+        align-items: flex-start;
+    }
+
+}
+
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 767px) {
+
+    .view-food-page {
+        padding: 35px 0 60px;
+    }
+
+    .food-details h1 {
+        font-size: 32px;
+    }
+
+    .food-price {
+        font-size: 29px;
+    }
+
+    .food-image-container {
+        min-height: 300px;
+
+        border-radius: 16px;
+    }
+
+    .food-main-image,
+    .food-image-placeholder {
+        height: 300px;
+    }
+
+    .food-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .reservation-action {
+        flex-direction: column;
+    }
+
+    .quantity-control {
+        width: 100%;
+    }
+
+    .quantity-control button {
+        width: 50px;
+    }
+
+    .quantity-control input {
+        flex: 1;
+    }
+
+    .btn-food-primary {
+        width: 100%;
+    }
+
+    .reviews-section {
+        margin-top: 60px;
+
+        padding-top: 45px;
+    }
+
+    .reviews-header {
+        flex-direction: column;
+    }
+
+    .overall-rating {
+        width: 100%;
+
+        box-sizing: border-box;
+
+        justify-content: center;
+    }
+
+    .review-card {
+        grid-template-columns: 1fr;
+
+        gap: 15px;
+    }
+
+    .review-user {
+        width: fit-content;
+    }
+
+    .review-top {
+        align-items: flex-start;
+    }
+
+    .foodloop-notice {
+        align-items: flex-start;
+
+        padding: 22px;
+    }
+
+}
+
+
+/* =========================================
+   SMALL MOBILE
+   ========================================= */
+
+@media (max-width: 480px) {
+
+
+    .food-details h1 {
+        font-size: 28px;
+    }
+
+    .food-rating {
+        flex-wrap: wrap;
+    }
+
+    .food-provider {
+        align-items: flex-start;
+    }
+
+    .provider-link {
+        display: none;
+    }
+
+    .reservation-box {
+        padding: 18px;
+    }
+
+    .reservation-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 5px;
+    }
+
+    .owner-actions {
+        flex-direction: column;
+    }
+
+    .owner-actions a {
+        width: 100%;
+    }
+
+    .reviews-header h2 {
+        font-size: 28px;
+    }
+
+    .review-form-card {
+        padding: 20px;
+    }
+
+    .foodloop-notice {
+        flex-direction: column;
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

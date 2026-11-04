@@ -1,0 +1,191 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    My Reviews - FoodLoop
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/my_dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="dashboard-page">
+
+    <div class="container">
+
+        <!-- HEADER -->
+        <div class="dashboard-header">
+
+            <span class="dashboard-label">
+                Customer Feedback
+            </span>
+
+            <h1>My Reviews</h1>
+
+            <p>
+                View the reviews you have written about food
+                you collected through FoodLoop.
+            </p>
+
+        </div>
+
+        <!-- REVIEW SUMMARY -->
+        <div class="review-summary">
+
+            <div class="summary-icon">
+                ⭐
+            </div>
+
+            <div>
+                <strong>Your FoodLoop Reviews</strong>
+
+                <p>
+                    Your feedback helps other customers make
+                    better decisions and helps providers improve.
+                </p>
+            </div>
+
+        </div>
+
+        <!-- REVIEWS -->
+        <div class="reviews-list">
+
+            {% for review in reviews %}
+
+                <article class="my-review-card">
+
+                    <!-- FOOD IMAGE -->
+                    <div class="review-food-image">
+
+                        {% if review.food.image %}
+                            <img
+                                src="{{ review.food.image.url }}"
+                                alt="{{ review.food.title }}"
+                            >
+                        {% else %}
+                            🍛
+                        {% endif %}
+
+                    </div>
+
+                    <div class="my-review-content">
+
+                        <div class="review-card-top">
+
+                            <div>
+
+                                <span class="food-category">
+                                    {{ review.food.category }}
+                                </span>
+
+                                <h2>
+                                    {{ review.food.title }}
+                                </h2>
+
+                            </div>
+
+                            <span class="review-date">
+                                {{ review.created_at|date:"M d, Y" }}
+                            </span>
+
+                        </div>
+
+                        <!-- RATING -->
+                        <div class="review-stars">
+
+                            {% for i in "12345" %}
+                                {% if forloop.counter <= review.rating %}
+                                    ★
+                                {% else %}
+                                    ☆
+                                {% endif %}
+                            {% endfor %}
+
+                            <span>
+                                {{ review.rating }}.0
+                            </span>
+
+                        </div>
+
+                        <!-- REVIEW COMMENT -->
+                        <p class="review-text">
+                            {{ review.comment }}
+                        </p>
+
+                        <!-- PROVIDER -->
+                        <div class="review-provider">
+
+                            <span>
+                                Reviewed provider:
+                            </span>
+
+                            <strong>
+                                {{ review.food.provider.username }}
+                            </strong>
+
+                        </div>
+
+                        <!-- ACTIONS -->
+                        <div class="review-actions">
+
+                            <form
+                                method="POST"
+                                action="{% url 'accounts:delete_review' review.pk %}"
+                                onsubmit="return confirm('Are you sure you want to delete this review?');"
+                            >
+                                {% csrf_token %}
+
+                                <button
+                                    type="submit"
+                                    class="delete-review-button"
+                                >
+                                    Delete
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            {% empty %}
+
+                <!-- EMPTY STATE -->
+                <div class="empty-state">
+
+                    <div class="empty-icon">
+                        ⭐
+                    </div>
+
+                    <h2>
+                        You haven't written any reviews
+                    </h2>
+
+                    <p>
+                        After completing a reservation, you can
+                        leave a review for the food and provider.
+                    </p>
+
+                    <a
+                        href="{% url 'accounts:my_reservations' %}"
+                        class="dashboard-button"
+                    >
+                        My Reservations
+                    </a>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

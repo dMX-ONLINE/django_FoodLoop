@@ -1,0 +1,341 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+FoodLoop - Rescue Food, Reduce Waste
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/viewfood.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<section class="view-food-page">
+
+    <div class="container">
+
+        <!-- =========================
+             BACK
+        ========================== -->
+
+        <a
+            href="{% url 'marketplace:marketplace' %}"
+            class="back-link"
+        >
+            ← Back to Marketplace
+        </a>
+
+
+        <!-- =========================
+             FOOD DETAILS
+        ========================== -->
+
+        <div class="food-details-layout">
+
+
+            <!-- =========================
+                 FOOD IMAGE
+            ========================== -->
+
+            <div class="food-image-container">
+
+                {% if food.image %}
+
+                    <img
+                        src="{{ food.image.url }}"
+                        alt="{{ food.title }}"
+                        class="food-main-image"
+                    >
+
+                {% else %}
+
+                    <div class="food-image-placeholder">
+                        🍱
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <!-- =========================
+                 FOOD INFORMATION
+            ========================== -->
+
+            <div class="food-details">
+
+                <span class="food-category">
+                    {{ food.category }}
+                </span>
+
+
+                <h1>
+                    {{ food.title }}
+                </h1>
+
+
+                <div class="food-rating">
+
+                    <span class="stars">
+                        ★★★★★
+                    </span>
+
+                    <span>
+                        4.8
+                    </span>
+
+                    <a href="#reviews">
+                        24 reviews
+                    </a>
+
+                </div>
+
+
+                <div class="food-price">
+
+                    ₦{{ food.price }}
+
+                    <small>
+                        per unit
+                    </small>
+
+                </div>
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="food-description">
+
+                    <h2>
+                        About this food
+                    </h2>
+
+                    <p>
+                        {{ food.description }}
+                    </p>
+
+                </div>
+
+
+                <!-- =========================
+                     FOOD INFORMATION
+                ========================== -->
+
+                <div class="food-info-grid">
+
+
+                    <div class="food-info-item">
+
+                        <span class="info-icon">
+                            📦
+                        </span>
+
+                        <div>
+
+                            <small>
+                                Available
+                            </small>
+
+                            <strong>
+                                {{ food.quantity }} units
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="food-info-item">
+
+                        <span class="info-icon">
+                            📞
+                        </span>
+
+                        <div>
+
+                            <small>
+                                Contact
+                            </small>
+
+                            <strong>
+                                Call : {{ food.provider.profile.phone_number }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="food-info-item">
+
+                        <span class="info-icon">
+                            ⏰
+                        </span>
+
+                        <div>
+
+                            <small>
+                                Available Until
+                            </small>
+
+                            <strong>
+                                {{ food.expiry_time|date:"M d, Y - g:i A" }}
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="food-info-item">
+
+                        <span class="info-icon">
+                            🚶
+                        </span>
+
+                        <div>
+
+                            <small>
+                                Collection
+                            </small>
+
+                            <strong>
+                                Pickup Only
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =========================
+                     PROVIDER
+                ========================== -->
+
+                <div class="food-provider">
+
+                    <div class="profile-avatar">
+                        {% if food.provider.profile.avatar %}
+                            <img
+                                src="{{ food.provider.profile.avatar.url }}"
+                                alt="{{ food.provider.username }}'s profile picture"
+                            >
+                        {% else %}
+                            <span>
+                                {{ food.provider.username|first|upper }}
+                            </span>
+                        {% endif %}
+                    </div>
+
+                    <div class="provider-details">
+
+                        <small>
+                            Offered by {{ food.provider.username }}
+                        </small>
+
+                     
+
+                        <span class="provider-rating">
+                            ★ 4.8
+                        </span>
+
+                    </div>
+
+                    <a
+                        href="{% url 'reservations:review' food.id %}"
+                        class="provider-link"
+                    >
+                        View Reviews
+                    </a>
+
+                </div>
+
+
+                <!-- =========================
+                     RESERVE FOOD
+                ========================== -->
+
+
+                <button class="reserve-food-btn" type="button" onclick="location.href='{% url 'reservations:reservation' food.id %}'">
+                    <h2>Reserve This Food</h2>
+                </button>
+
+            </div>
+
+        </div>
+</section>
+
+
+<!-- =========================
+     QUANTITY JAVASCRIPT
+========================== -->
+
+<script>
+
+const foodPrice = Number(
+    "{{ food.price }}"
+);
+
+function updateTotal() {
+
+    const quantity =
+        Number(
+            document.getElementById("quantity").value
+        );
+
+    const total =
+        foodPrice * quantity;
+
+    document.getElementById("total-price").textContent =
+        "₦" + total.toLocaleString();
+
+}
+
+
+function increaseQuantity() {
+
+    const input =
+        document.getElementById("quantity");
+
+    const max =
+        Number(input.max);
+
+    let value =
+        Number(input.value);
+
+    if (value < max) {
+
+        input.value = value + 1;
+
+        updateTotal();
+
+    }
+
+}
+
+
+function decreaseQuantity() {
+
+    const input =
+        document.getElementById("quantity");
+
+    let value =
+        Number(input.value);
+
+    if (value > 1) {
+
+        input.value = value - 1;
+
+        updateTotal();
+
+    }
+
+}
+
+</script>
+
+{% endblock %}
+

@@ -1,0 +1,636 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Reviews - {{ food.title }}
+{% endblock %}
+
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/review.css' %}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="review-page">
+
+    <div class="container">
+
+        <!-- =========================
+             BACK LINK
+        ========================== -->
+
+        <a
+            href="{% url 'marketplace:viewfood' food.id %}"
+            class="review-back"
+        >
+            ← Back to View Food
+        </a>
+
+
+        <!-- =========================
+             PAGE HEADER
+        ========================== -->
+
+        <div class="review-page-header">
+
+            <span class="review-label">
+                Food Reviews
+            </span>
+
+            <h1>
+                Reviews for {{ food.title }}
+            </h1>
+
+            <p>
+                See what other FoodLoop customers think
+                about this food.
+            </p>
+
+        </div>
+
+
+        <!-- =========================
+             FOOD SUMMARY
+        ========================== -->
+
+        <div class="food-review-summary">
+
+            <div class="food-review-image">
+
+                {% if food.image %}
+
+                    <img
+                        src="{{ food.image.url }}"
+                        alt="{{ food.title }}"
+                    >
+
+                {% else %}
+
+                    <div class="review-image-placeholder">
+                        🍱
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="food-review-info">
+
+                <span class="food-review-category">
+                    {{ food.category }}
+                </span>
+
+                <h2>
+                    {{ food.title }}
+                </h2>
+
+                <p>
+                    {{ food.description }}
+                </p>
+
+
+                <div class="food-review-rating">
+
+                    <div class="stars">
+                            
+                                {% if overall_rating >= 4.5 %}
+                                    ★★★★★
+                                {% elif overall_rating >= 3.5 %}
+                                    ★★★★☆
+                                {% elif overall_rating >= 2.5 %}
+                                    ★★★☆☆
+                                {% elif overall_rating >= 1.5 %}
+                                    ★★☆☆☆
+                                {% elif overall_rating >= 0.5 %}
+                                    ★☆☆☆☆
+                                {% else %}
+                                    ☆☆☆☆☆
+                                {% endif %}
+                            
+                            </div>
+
+                    <strong>
+                       {{ overall_rating|floatformat:1 }} 
+                    </strong>
+
+                    <span>
+                        {{ total_reviews }} reviews
+                    </span>
+
+                </div>
+
+
+                <a
+                    href="{% url 'reservations:view_image' food.id %}"
+                    class="view-food-button"
+                >
+                    View Image
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             REVIEW CONTENT
+        ========================== -->
+
+        <div class="review-layout">
+
+
+            <!-- =========================
+                 WRITE REVIEW
+            ========================== -->
+
+            <div class="write-review-card">
+
+                <div class="card-heading">
+
+                    <span class="heading-icon">
+                        ✍️
+                    </span>
+
+                    <div>
+
+                        <h2>
+                            Write a Review
+                        </h2>
+
+                        <p>
+                            Share your experience with other
+                            FoodLoop users.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                {% if user.is_authenticated %}
+
+                    <form
+                        method="POST"
+                        class="review-form"
+                    >
+
+                        {% csrf_token %}
+
+
+                        <!-- RATING -->
+
+                        <div class="form-group">
+                            <select name="rating" id="rating" required>
+                                <option value="">Choose a rating</option>
+                                <option value="5">★★★★★ - Excellent</option>
+                                <option value="4">★★★★☆ - Very Good</option>
+                                <option value="3">★★★☆☆ - Good</option>
+                                <option value="2">★★☆☆☆ - Fair</option>
+                                <option value="1">★☆☆☆☆ - Poor</option>
+                            </select>
+                        </div>
+
+
+                        <!-- REVIEW -->
+
+                        <div class="form-group">
+
+                            <label for="review">
+                                Your Review
+                            </label>
+
+                            <textarea
+                                id="review"
+                                name="comment"
+                                rows="6"
+                                placeholder="How was the food? Tell us about your experience..."
+                                required
+                            ></textarea>
+
+                        </div>
+
+
+                        <!-- SUBMIT -->
+
+                        <button
+                            type="submit"
+                            class="submit-review-button"
+                        >
+                            Submit Review
+                        </button>
+
+                    </form>
+
+
+                {% else %}
+
+                    <div class="login-review-message">
+
+                        <p>
+                            You need to log in before you can
+                            leave a review.
+                        </p>
+
+                        <a
+                            href="{% url 'accounts:login' %}"
+                            class="submit-review-button"
+                        >
+                            Login to Review
+                        </a>
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+
+
+            <!-- =========================
+                 RATING SUMMARY
+            ========================== -->
+
+            <div class="rating-summary-card">
+                <div class="rating-summary-card">
+
+                    <h2>
+                        Overall Rating
+                    </h2>
+                
+                
+                    <div class="big-rating">
+                    
+                        <strong>
+                            {{ overall_rating|floatformat:1 }}
+                        </strong>
+                    
+                        <div>
+                        
+                            <div class="stars">
+                            
+                                {% if overall_rating >= 4.5 %}
+                                    ★★★★★
+                                {% elif overall_rating >= 3.5 %}
+                                    ★★★★☆
+                                {% elif overall_rating >= 2.5 %}
+                                    ★★★☆☆
+                                {% elif overall_rating >= 1.5 %}
+                                    ★★☆☆☆
+                                {% elif overall_rating >= 0.5 %}
+                                    ★☆☆☆☆
+                                {% else %}
+                                    ☆☆☆☆☆
+                                {% endif %}
+                            
+                            </div>
+                        
+                            <span>
+                                Based on {{ total_reviews }}
+                                review{{ total_reviews|pluralize }}
+                            </span>
+                        
+                        </div>
+                    
+                    </div>
+                
+                
+                    <!-- 5 STAR -->
+                
+                    <div class="rating-bar">
+                    
+                        <span>
+                            5
+                        </span>
+                    
+                        <div class="bar">
+                        
+                            <div
+                                class="bar-fill"
+                                style="width:
+                                {% if total_reviews %}
+                                    {% widthratio rating_counts.5 total_reviews 100 %}
+                                {% else %}
+                                    0
+                                {% endif %}%"
+                            ></div>
+                        
+                        </div>
+                    
+                        <small>
+                        
+                            {% if total_reviews %}
+                                {% widthratio rating_counts.5 total_reviews 100 %}%
+                            {% else %}
+                                0%
+                            {% endif %}
+                        
+                        </small>
+                    
+                    </div>
+                
+                
+                    <!-- 4 STAR -->
+                
+                    <div class="rating-bar">
+                    
+                        <span>
+                            4
+                        </span>
+                    
+                        <div class="bar">
+                        
+                            <div
+                                class="bar-fill"
+                                style="width:
+                                {% if total_reviews %}
+                                    {% widthratio rating_counts.4 total_reviews 100 %}
+                                {% else %}
+                                    0
+                                {% endif %}%"
+                            ></div>
+                        
+                        </div>
+                    
+                        <small>
+                        
+                            {% if total_reviews %}
+                                {% widthratio rating_counts.4 total_reviews 100 %}%
+                            {% else %}
+                                0%
+                            {% endif %}
+                        
+                        </small>
+                    
+                    </div>
+                
+                
+                    <!-- 3 STAR -->
+                
+                    <div class="rating-bar">
+                    
+                        <span>
+                            3
+                        </span>
+                    
+                        <div class="bar">
+                        
+                            <div
+                                class="bar-fill"
+                                style="width:
+                                {% if total_reviews %}
+                                    {% widthratio rating_counts.3 total_reviews 100 %}
+                                {% else %}
+                                    0
+                                {% endif %}%"
+                            ></div>
+                        
+                        </div>
+                    
+                        <small>
+                        
+                            {% if total_reviews %}
+                                {% widthratio rating_counts.3 total_reviews 100 %}%
+                            {% else %}
+                                0%
+                            {% endif %}
+                        
+                        </small>
+                    
+                    </div>
+                
+                
+                    <!-- 2 STAR -->
+                
+                    <div class="rating-bar">
+                    
+                        <span>
+                            2
+                        </span>
+                    
+                        <div class="bar">
+                        
+                            <div
+                                class="bar-fill"
+                                style="width:
+                                {% if total_reviews %}
+                                    {% widthratio rating_counts.2 total_reviews 100 %}
+                                {% else %}
+                                    0
+                                {% endif %}%"
+                            ></div>
+                        
+                        </div>
+                    
+                        <small>
+                        
+                            {% if total_reviews %}
+                                {% widthratio rating_counts.2 total_reviews 100 %}%
+                            {% else %}
+                                0%
+                            {% endif %}
+                        
+                        </small>
+                    
+                    </div>
+                
+                
+                    <!-- 1 STAR -->
+                
+                    <div class="rating-bar">
+                    
+                        <span>
+                            1
+                        </span>
+                    
+                        <div class="bar">
+                        
+                            <div
+                                class="bar-fill"
+                                style="width:
+                                {% if total_reviews %}
+                                    {% widthratio rating_counts.1 total_reviews 100 %}
+                                {% else %}
+                                    0
+                                {% endif %}%"
+                            ></div>
+                        
+                        </div>
+                    
+                        <small>
+                        
+                            {% if total_reviews %}
+                                {% widthratio rating_counts.1 total_reviews 100 %}
+                            {% else %}
+                                0
+                            {% endif %}%
+                        
+                        </small>
+                    
+                    </div>
+                
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             CUSTOMER REVIEWS
+        ========================== -->
+
+        <section class="customer-reviews">
+
+    <div class="customer-reviews-header">
+
+        <div>
+
+            <span>
+                CUSTOMER FEEDBACK
+            </span>
+
+            <h2>
+                What customers are saying
+            </h2>
+
+        </div>
+
+        <span class="review-count">
+            {{ reviews|length }}
+            Review{{ reviews|length|pluralize }}
+        </span>
+
+    </div>
+
+
+    {% if reviews %}
+
+        {% for review in reviews %}
+
+            <article class="customer-review">
+
+                <!-- USER -->
+
+                <div class="review-user">
+
+                    <div class="review-avatar">
+                        {{ review.user.username|first|upper }}
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            {{ review.user.username }}
+                        </strong>
+
+                        <span>
+                            Verified Pickup
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- REVIEW CONTENT -->
+
+                <div class="customer-review-content">
+
+                    <div class="review-top">
+
+                        <div class="stars">
+
+                            {% if review.rating == 5 %}
+                                ★★★★★
+
+                            {% elif review.rating == 4 %}
+                                ★★★★☆
+
+                            {% elif review.rating == 3 %}
+                                ★★★☆☆
+
+                            {% elif review.rating == 2 %}
+                                ★★☆☆☆
+
+                            {% elif review.rating == 1 %}
+                                ★☆☆☆☆
+
+                            {% endif %}
+
+                        </div>
+
+                        <span>
+                            {{ review.created_at|timesince }} ago
+                        </span>
+
+                    </div>
+
+
+                    <p>
+                        {{ review.comment }}
+                    </p>
+
+                </div>
+
+            </article>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="no-reviews">
+
+            <h3>
+                No reviews yet
+            </h3>
+
+            <p>
+                Be the first customer to leave a review for
+                {{ food.title }}.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+        <!-- =========================
+             FOODLOOP MESSAGE
+        ========================== -->
+
+        <div class="review-notice">
+
+            <div class="notice-icon">
+                ♻️
+            </div>
+
+            <div>
+
+                <h3>
+                    Your review helps reduce food waste.
+                </h3>
+
+                <p>
+                    Honest reviews help other FoodLoop users
+                    discover good surplus food and reliable
+                    providers.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
+

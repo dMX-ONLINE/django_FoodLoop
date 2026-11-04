@@ -1,0 +1,184 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    My Profile - FoodLoop
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="profile-page">
+
+    <!-- =========================
+         PROFILE HEADER / HERO
+    ========================== -->
+    <div class="profile-hero">
+        <div class="container">
+
+            <div class="profile-hero-card">
+
+                <div class="profile-avatar">
+                    {% if user.profile.avatar %}
+                        <img src="{{ profile.avatar.url }}" alt="{{ user.username }}">
+                    {% else %}
+                        <span>{{ user.username|first|upper }}</span>
+                    {% endif %}
+                </div>
+
+                <div class="profile-hero-info">
+                    <span class="profile-badge">FoodLoop Member</span>
+                    <h1>{{ user.get_full_name|default:user.username }}</h1>
+                    <p class="profile-handle">@{{ user.username }}</p>
+                    <p class="profile-meta">
+                        <span>📧 {{ user.email|default:"No email" }}</span>
+                        {% if user.profile.address %}
+                            <span>📍 {{ user.profile.address }}</span>
+                        {% endif %}
+                    </p>
+                </div>
+
+                <a href="{% url 'accounts:edit_profile' %}" class="btn-edit">✏️ Edit Profile</a>
+
+            </div>
+
+            <!-- STAT STRIP -->
+            <div class="profile-stats">
+                <div class="stat">
+                    <strong>{{ my_listings_count|default:"0" }}</strong>
+                    <span>Listings</span>
+                </div>
+                <div class="stat">
+                    <strong>{{ my_reservations_count|default:"0" }}</strong>
+                    <span>Reservations</span>
+                </div>
+                <div class="stat">
+                    <strong>{{ my_reviews_count|default:"0" }}</strong>
+                    <span>Reviews</span>
+                </div>
+                <div class="stat stat-rating">
+                    <strong>⭐{{ average_rating|default:"0.0" }} </strong>
+                    <span>Rating</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="container profile-body">
+
+        <div class="profile-layout">
+
+            <!-- =========================
+                 MAIN COLUMN
+            ========================== -->
+            <div class="profile-main">
+
+                <!-- PERSONAL INFORMATION -->
+                <div class="profile-card">
+                    <div class="card-header">
+                        <h2>Personal Information</h2>
+                        <p>Your basic FoodLoop account details.</p>
+                    </div>
+
+                    <div class="details-grid">
+                        <div class="detail">
+                            <span>Full Name</span>
+                            <strong>{{ user.get_full_name|default:"Not provided" }}</strong>
+                        </div>
+                        <div class="detail">
+                            <span>Username</span>
+                            <strong>@{{ user.username }}</strong>
+                        </div>
+                        <div class="detail">
+                            <span>Email Address</span>
+                            <strong>{{ user.email|default:"Not provided" }}</strong>
+                        </div>
+                        <div class="detail">
+                            <span>Phone Number</span>
+                            <strong>{{ user.profile.phone_number|default:"Not provied" }}</strong>
+                        </div>
+                        <div class="detail detail-wide">
+                            <span>Pickup Address</span>
+                            <strong>{{ user.profile.pickup_address|default:"Not provided" }}</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MY ACTIVITY -->
+                <div class="profile-card">
+                    <div class="card-header">
+                        <h2>My FoodLoop Activity</h2>
+                        <p>Jump back into what you were doing.</p>
+                    </div>
+
+                    <div class="activity-grid">
+                        <a href="{% url 'accounts:my_listings' %}" class="activity-card">
+                            <div class="activity-icon icon-green">🍱</div>
+                            <div>
+                                <strong>My Listings</strong>
+                                <span>Food you have offered</span>
+                            </div>
+                            <span class="activity-arrow">→</span>
+                        </a>
+
+                        <a href="{% url 'accounts:my_reservations' %}" class="activity-card">
+                            <div class="activity-icon icon-orange">📋</div>
+                            <div>
+                                <strong>My Reservations</strong>
+                                <span>Food you have reserved</span>
+                            </div>
+                            <span class="activity-arrow">→</span>
+                        </a>
+
+                        <a href="{% url 'accounts:my_reviews' %}" class="activity-card">
+                            <div class="activity-icon icon-yellow">⭐</div>
+                            <div>
+                                <strong>My Reviews</strong>
+                                <span>Reviews you have received</span>
+                            </div>
+                            <span class="activity-arrow">→</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- =========================
+                 SIDEBAR
+            ========================== -->
+            <aside class="profile-sidebar">
+
+                <div class="side-card side-cta">
+                    <div class="side-icon">🌱</div>
+                    <h3>FoodLoop Member</h3>
+                    <p>Thank you for helping reduce food waste in your community. Keep looping!</p>
+                </div>
+
+                <div class="side-card">
+                    <h3>Quick Actions</h3>
+                    <nav class="side-links">
+                        <a href="{% url 'accounts:edit_profile' %}">Edit Profile</a>
+                        <a href="{% url 'accounts:forget_password' %}"> Change Password</a>
+                        <a href="{% url 'accounts:my_listings' %}">My Listings</a>
+                        <a href="{% url 'accounts:my_reservations' %}">My Reservations</a>
+                        <form method="POST" action="{% url 'accounts:logout' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="logout-btn">
+                                Logout
+                            </button>
+                        </form>
+                    </nav>
+                    
+                </div>
+
+            </aside>
+
+        </div>
+    </div>
+
+</section>
+{% endblock %}

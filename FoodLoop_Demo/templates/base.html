@@ -1,0 +1,369 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}
+            FoodLoop
+        {% endblock %}
+    </title>
+
+    <!-- FoodLoop CSS -->
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+
+    {% block extra_css %}
+    {% endblock %}
+
+</head>
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+     ========================= -->
+<nav class="foodloop-navbar">
+
+    <div class="container">
+
+        <!-- Logo -->
+        <a href="{% url 'core:index' %}"
+            class="foodloop-logo">
+            <span class="logo-icon">
+                <i class="fas fa-leaf"></i>
+            </span>
+            Food<span>Loop</span>
+        </a>
+
+
+        <!-- Mobile Menu Button -->
+        <button
+            class="foodloop-toggler"
+            id="foodloopToggler"
+            type="button"
+            aria-label="Toggle navigation"
+            aria-expanded="false"
+        >
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+
+        <!-- Navigation -->
+        <ul class="foodloop-nav" id="foodloopNav">
+
+            <li>
+                <a
+                    class="foodloop-nav-link {% if request.resolver_match.url_name == 'index' %}active{% endif %}"
+                    href="{% url 'core:index' %}"
+                >
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a
+                    class="foodloop-nav-link {% if request.resolver_match.url_name == 'about' %}active{% endif %}"
+                    href="{% url 'core:about' %}"
+                >
+                    About
+                </a>
+            </li>
+
+            <li>
+                <a
+                    class="foodloop-nav-link {% if request.resolver_match.url_name == 'marketplace' %}active{% endif %}"
+                    href="{% url 'marketplace:marketplace' %}"
+                >
+                    Marketplace
+                </a>
+            </li>
+
+            <li>
+                <a
+                    class="foodloop-nav-link {% if request.resolver_match.url_name == 'offerfood' %}active{% endif %}"
+                    href="{% url 'marketplace:offerfood' %}"
+                >
+                    Offer Food
+                </a>
+            </li>
+
+            <li class="profiler">
+                <div class="profiler-avatar">
+                    {% if user.profile.avatar %}
+                        <img
+                            src="{{ user.profile.avatar.url }}"
+                            alt="{{ profile.username }}'s profile picture"
+                        >
+                    {% else %}
+                        <span>
+                            {{ food.provider.username|first|upper }}
+                        </span>
+                    {% endif %}
+                </div>
+                <a
+                    class="foodloop-nav-link {% if request.resolver_match.url_name == 'profile' %}active{% endif %}"
+                    href="{% url 'accounts:profile' %}"
+                >                    
+                    Profile
+                </a>
+            </li>
+
+        </ul>
+    </div>
+
+</nav>
+
+
+<!-- =========================
+     MAIN CONTENT
+     ========================= -->
+<main>
+
+    {% block content %}
+    {% endblock %}
+
+</main>
+
+
+<!-- =========================
+     FOODLOOP PROFESSIONAL FOOTER
+========================= -->
+
+<footer class="foodloop-footer">
+
+    <div class="container">
+
+        <!-- Footer Content -->
+        <div class="foodloop-footer-grid">
+
+            <!-- Brand -->
+            <div class="footer-brand">
+
+                <a href="{% url 'core:index' %}"
+                   class="foodloop-logo footer-logo">
+
+                    <span class="logo-icon">
+                        <i class="fas fa-leaf"></i>
+                    </span>
+
+                    Food<span>Loop</span>
+
+                </a>
+
+                <p>
+                    FoodLoop connects people and businesses with surplus
+                    food to people looking for affordable food.
+                    Together, we're building a smarter food system
+                    with less waste and more opportunity.
+                </p>
+
+                <div class="footer-impact">
+                    <span class="impact-icon">
+                        <i class="fas fa-seedling"></i>
+                    </span>
+
+                    <div>
+                        <strong>Less Waste. More Value.</strong>
+                        <small>A better future starts with every meal.</small>
+                    </div>
+                </div>
+
+                <div class="footer-socials">
+
+                    <a href="#"
+                       aria-label="Facebook"
+                       title="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+
+                    <a href="#"
+                       aria-label="Instagram"
+                       title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+
+                    <a href="#"
+                       aria-label="X"
+                       title="X">
+                        <i class="fab fa-x-twitter"></i>
+                    </a>
+
+                    <a href="#"
+                       aria-label="LinkedIn"
+                       title="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- Marketplace -->
+            <div class="footer-column">
+
+                <h5>Marketplace</h5>
+
+                <ul class="foodloop-footer-links">
+
+                    <li>
+                        <a href="{% url 'marketplace:marketplace' %}">
+                            <i class="fas fa-chevron-right"></i>
+                            Find Food
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'marketplace:offerfood' %}">
+                            <i class="fas fa-chevron-right"></i>
+                            Offer Surplus Food
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'marketplace:marketplace' %}">
+                            <i class="fas fa-chevron-right"></i>
+                            Browse Food Listings
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'marketplace:marketplace' %}">
+                            <i class="fas fa-chevron-right"></i>
+                            Discover Food Offers
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- Company -->
+            <div class="footer-column">
+
+                <h5>Company</h5>
+
+                <ul class="foodloop-footer-links">
+
+                    <li>
+                        <a href="{% url 'core:index' %}">
+                            <i class="fas fa-chevron-right"></i>
+                            Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{% url 'core:about' %}">
+                            <i class="fas fa-chevron-right"></i>
+                            About FoodLoop
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#"
+                           >
+                            <i class="fas fa-chevron-right"></i>
+                            Our Mission
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-chevron-right"></i>
+                            Contact Us
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- Support -->
+            <div class="footer-column">
+
+                <h5>Help & Support</h5>
+
+                <ul class="foodloop-footer-links">
+
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-chevron-right"></i>
+                            Help Centre
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-chevron-right"></i>
+                            Frequently Asked Questions
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-chevron-right"></i>
+                            Privacy Policy
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-chevron-right"></i>
+                            Terms & Conditions
+                        </a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+
+        <!-- Footer Bottom -->
+        <div class="foodloop-footer-bottom">
+
+            <p>
+                &copy; {% now "Y" %} FoodLoop.
+                All rights reserved.
+            </p>
+
+            <p class="footer-bottom-message">
+                <i class="fas fa-heart"></i>
+                Built for a world with less food waste.
+            </p>
+
+            <button
+                id="backToTop"
+                class="back-to-top"
+                type="button"
+                aria-label="Back to top"
+                title="Back to top"
+            >
+                <i class="fas fa-arrow-up" aria-hidden="true"></i>
+                Back To Top
+            </button>
+
+        </div>
+
+    </div>
+
+    <script src="{% static 'marketplace.js' %}"></script>
+
+</footer>
+

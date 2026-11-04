@@ -1,0 +1,327 @@
+:root {
+    --fl-green: #2e7d32;
+    --fl-green-dark: #1b5e20;
+    --fl-green-light: #e8f5e9;
+    --fl-orange: #f97316;
+    --fl-orange-light: #fff3e6;
+    --fl-text: #1f2937;
+    --fl-muted: #6b7280;
+    --fl-border: #e5e7eb;
+    --fl-bg: #f7f8f7;
+    --fl-white: #ffffff;
+    --fl-radius: 16px;
+    --fl-shadow: 0 6px 24px rgba(27, 94, 32, 0.08);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    color: var(--fl-text);
+    background: var(--fl-bg);
+    line-height: 1.6;
+    background-image: url("../image/back1.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+}
+
+.foodloop-navbar {
+    box-shadow: 0 2px 12px rgba(27, 94, 32, 0.08);
+    padding: 0.9rem 0;
+    position: sticky;
+    top: 1;
+    z-index: 1000;
+    height: auto;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(245, 245, 245, 0.426);
+    border-radius: 0px 0px 30px 30px;
+}
+
+.foodloop-navbar .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.foodloop-logo {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--fl-green-dark);
+    text-decoration: none;
+    display: inline-block;
+    text-shadow: 1px 1px 1px white;
+}
+
+.foodloop-logo span {
+    color: var(--fl-orange);
+}
+
+.foodloop-nav {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    list-style: none;
+    margin-left: auto;
+}
+
+
+.btn-foodloop {
+    color: white;
+    font-weight: 600;
+    padding: 0.55rem 1.4rem;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 700;
+    transition: 0.2s ease;
+    display: inline-block;
+    text-shadow: 1px 1px 1px white;
+    animation: lift 4s ease-in-out infinite;
+}
+
+@keyframes lift {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(8px);
+    }
+}
+
+.btn-foodloop:hover {
+    background: var(--fl-orange);
+    transform: translateY(-2px);
+}
+
+.hero{
+    height: 90vh;
+    padding: 6rem 0rem;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 4rem;
+    width: 90%;
+    align-items: center;
+}
+
+.hero-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 0.4rem 1rem;
+    border-radius: 999px;
+    margin-bottom: 1.25rem;
+}
+
+.hero-text h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.15;
+    margin: 0 0 1.1rem;
+    color: var(--fl-white);
+    text-shadow: 2px 0px 5px rgba(0, 0, 0, 0.378);
+
+}
+
+.hero-accent {
+    color: var(--fl-orange);
+    display: block;
+}
+
+.hero-lead {
+    font-size: 1.1rem;
+    opacity: 0.92;
+    line-height: 1.7;
+    max-width: 520px;
+    color: var(--fl-white);
+    margin: 0 0 1.8rem;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 0.9rem;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+    width: 100%;
+}
+
+.hero-stats {
+    display: flex;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+    color: var(--fl-white);
+    text-shadow: 2px 0px 0px rgba(0, 0, 0, 0.378);
+}
+
+.hero-stat strong {
+    display: block;
+    font-size: 1.6rem;
+    font-weight: 800;
+}
+
+.hero-stat span {
+    font-size: 0.85rem;
+    opacity: 0.85;
+}
+
+
+.hero-card{
+    width: 29rem;
+    height: 29rem;
+    animation: rotation 10s linear infinite;
+}
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.hero-card img{
+    width: 100%;
+    
+}
+
+.home-hero-image {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25);
+    transform: rotate(2deg);
+    transition: 0.3s ease;
+}
+
+/* =========================
+   BUTTONS
+========================== */
+.btn {
+    display: inline-block;
+    font-weight: 600;
+    padding: 0.8rem 1.7rem;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 0.98rem;
+    transition: 0.2s ease;
+    text-align: center;
+}
+
+.btn-orange {
+    background: var(--fl-orange);
+    color: var(--fl-white);
+    box-shadow: 0 6px 18px rgba(249, 115, 22, 0.35);
+}
+
+.btn-orange:hover {
+    background: var(--fl-orange-dark);
+    transform: translateY(-2px);
+}
+
+.btn-ghost-light {
+    background: rgba(255, 255, 255, 0.12);
+    color: var(--fl-white);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+}
+
+.btn-ghost-light:hover {
+    background: var(--fl-white);
+    color: var(--fl-green-dark);
+}
+
+
+/* =========================
+   RESPONSIVE
+========================== */
+@media (max-width: 1024px) {
+    
+    .hero-card {
+        width: 24rem;
+        height: 24rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .hero-grid,
+    .why-grid {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .steps-grid,
+    .audience-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .hero-text h1 {
+        font-size: 2.3rem;
+    }
+
+    .hero-card{
+        display: none;
+    }
+}
+
+@media (max-width: 576px) {
+    .foodloop-logo{
+        font-size: 1.2rem;
+    }
+    .foodloop-navbar {
+        height: auto;
+    }
+
+    .hero {
+        padding: 3.5rem 0;
+        height: auto;
+    }
+
+    .hero-text h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero-grid{
+        text-align: center;
+    }
+
+    .hero-actions{
+        justify-content: center;
+    }
+
+    .steps-grid,
+    .audience-grid,
+    .why-grid-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-stats {
+        display: grid;
+        gap: 1.5rem;
+    }
+
+    .section {
+        padding: 3.5rem 0;
+    }
+
+    .cta h2 {
+        font-size: 1.7rem;
+    }
+}

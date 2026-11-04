@@ -1,0 +1,546 @@
+:root {
+    --fl-green: #2e7d32;
+    --fl-green-dark: #1b5e20;
+    --fl-green-light: #e8f5e9;
+    --fl-orange: #f97316;
+    --fl-orange-light: #fff3e6;
+    --fl-text: #1f2937;
+    --fl-muted: #6b7280;
+    --fl-border: #e5e7eb;
+    --fl-bg: #f7f8f7;
+    --fl-white: #ffffff;
+    --fl-radius: 16px;
+    --fl-shadow: 0 6px 24px rgba(27, 94, 32, 0.08);
+    --fl-shadow-hover: 0 14px 36px rgba(27, 94, 32, 0.16);
+}
+
+.marketplace {
+    position: relative;
+    min-height: 100vh;
+    padding-bottom: 4rem;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+}
+
+/* =========================
+   BUTTONS
+========================== */
+.btn {
+    display: inline-block;
+    font-weight: 600;
+    padding: 0.7rem 1.5rem;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: 0.2s ease;
+    text-align: center;
+}
+
+.btn-primary {
+    background: var(--fl-green);
+    color: var(--fl-white);
+}
+
+.btn-primary:hover {
+    background: var(--fl-green-dark);
+    transform: translateY(-2px);
+}
+
+.btn-light {
+    background: var(--fl-orange);
+    color: var(--fl-white);
+}
+
+.btn-light:hover {
+    color: var(--fl-orange);
+    background: var(--fl-green-light);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--fl-green);
+    border: 2px solid var(--fl-green);
+}
+
+.btn-outline:hover {
+    background: var(--fl-green);
+    color: var(--fl-white);
+}
+
+/* =========================
+   HERO
+========================== */
+.marketplace-hero {
+    background-image: url('../image/hero2.jpeg');
+    background-size: cover;
+    background-position: center;
+    padding: 6rem 0 5.5rem;
+    text-align: center;
+    color: var(--fl-white);
+}
+
+.hero-label {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.35rem 0.9rem;
+    border-radius: 999px;
+    margin-bottom: 1rem;
+    text-shadow: 1px 1px 1px black;
+}
+
+.marketplace-hero h1 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    margin: 0 0 0.6rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.marketplace-hero p {
+    font-size: 1.05rem;
+    opacity: 0.92;
+    margin: 0 auto 1.8rem;
+    max-width: 520px;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+
+}
+
+.hero-search {
+    display: flex;
+    gap: 0.75rem;
+    max-width: 640px;
+    margin: 0 auto;
+}
+
+.search-box {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--fl-white);
+    border-radius: 14px;
+    padding: 0 1.1rem;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.search-box span {
+    font-size: 1.1rem;
+}
+
+.search-box input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 0.85rem 0;
+    font-size: 0.95rem;
+    color: var(--fl-text);
+    background: transparent;
+}
+
+/* =========================
+   LAYOUT
+========================== */
+.marketplace-body {
+    position: relative;
+    z-index: 2;
+    width: 90vw;
+    margin: 3rem auto;
+}
+
+.marketplace-layout {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+/* =========================
+   FILTERS
+========================== */
+.marketplace-filters {
+    background: var(--fl-white);
+    border-radius: var(--fl-radius);
+    box-shadow: var(--fl-shadow);
+    padding: 1rem;
+    position: sticky;
+    top: 1.5rem;
+}
+
+.filter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.filter-header h2 {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--fl-text);
+    margin: 0;
+}
+
+.filter-header a {
+    font-size: 0.83rem;
+    color: var(--fl-orange);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.filter-header a:hover {
+    text-decoration: underline;
+}
+
+.filter-group {
+    margin-bottom: 1.1rem;
+    margin-top: 10px;
+}
+
+.filter-group label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--fl-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.4rem;
+}
+
+.filter-group select,
+.price-input input {
+    width: 100%;
+    padding: 0.65rem 0.85rem;
+    border: 1px solid var(--fl-border);
+    border-radius: 10px;
+    font-size: 0.92rem;
+    color: var(--fl-text);
+    background: var(--fl-bg);
+    outline: none;
+    transition: 0.15s ease;
+}
+
+.filter-group select:focus,
+.price-input input:focus {
+    border-color: var(--fl-green);
+    background: var(--fl-white);
+    box-shadow: 0 0 0 3px var(--fl-green-light);
+}
+
+.price-input {
+    display: flex;
+    align-items: center;
+    background: var(--fl-bg);
+    border: 1px solid var(--fl-border);
+    border-radius: 10px;
+    padding-left: 0.85rem;
+}
+
+.price-input:focus-within {
+    border-color: var(--fl-green);
+    background: var(--fl-white);
+    box-shadow: 0 0 0 3px var(--fl-green-light);
+}
+
+.price-input span {
+    color: var(--fl-muted);
+    font-weight: 700;
+}
+
+.price-input input {
+    border: none;
+    background: transparent;
+    box-shadow: none;
+}
+
+.filter-button {
+    width: 100%;
+    margin-top: 0.4rem;
+}
+
+/* =========================
+   RESULTS HEADER
+========================== */
+.results-header {
+    text-align: center;
+    margin-bottom: 1.25rem;
+}
+
+.results-header h2 {
+    font-size: 1.9rem;
+    font-weight: 700;
+    color: black;
+    margin: 0 0 0.2rem;
+}
+
+.results-header p {
+    color: var(--fl-muted);
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* =========================
+   FOOD GRID + CARDS
+========================== */
+.marketplace-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.marketplace-card {
+    background: var(--fl-white);
+    border-radius: var(--fl-radius);
+    box-shadow: var(--fl-shadow);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: 0.25s ease;
+}
+
+.marketplace-card[hidden] {
+    display: none !important;
+}
+
+.marketplace-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--fl-shadow-hover);
+}
+
+.food-card-image {
+    position: relative;
+    height: 180px;
+    background: var(--fl-green-light);
+}
+
+.food-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.food-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+}
+
+.food-category-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(255, 255, 255, 0.95);
+    color: var(--fl-green-dark);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: capitalize;
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+.food-card-body {
+    padding: 1.2rem 1.3rem 1.3rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.food-card-body h3 {
+    font-size: 1.08rem;
+    font-weight: 700;
+    color: var(--fl-text);
+    margin: 0 0 0.35rem;
+}
+
+.food-description {
+    font-size: 0.87rem;
+    color: var(--fl-muted);
+    margin: 0 0 0.9rem;
+    line-height: 1.5;
+}
+
+.food-provider {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    margin-bottom: 0.9rem;
+}
+
+.profile-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--fl-green), var(--fl-orange));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 4px solid var(--fl-white);
+    box-shadow: 0 0 0 4px var(--fl-green-light);
+}
+
+.profile-avatar span,
+.profile-avatar img {
+    font-size: 2.6rem;
+    font-weight: 700;
+    color: var(--fl-white);
+}
+
+.profile-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.food-card-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.1rem;
+    padding: 0.8rem 0;
+    border-top: 1px solid var(--fl-border);
+    border-bottom: 1px solid var(--fl-border);
+    margin-bottom: 1rem;
+}
+
+.food-card-info > div {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+.food-rating {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    font-size: 0.9rem;
+}
+
+.rating-stars {
+    color: #f5a623;
+    font-size: 1.2rem;
+}
+
+.food-rating strong {
+    color: #263238;
+    font-weight: 700;
+}
+
+.rating-count {
+    color: #888;
+    font-size: 0.8rem;
+}
+
+.no-rating {
+    color: #888;
+    font-size: 0.85rem;
+    font-style: italic;
+}
+
+.food-card-info p {
+    font-size: 0.8rem;
+    color: var(--fl-muted);
+    margin: 0;
+}
+
+.food-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
+
+.food-price span {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--fl-muted);
+}
+
+.food-price strong {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--fl-green-dark);
+}
+
+.btn-view {
+    padding: 0.55rem 1.2rem;
+    font-size: 0.88rem;
+}
+
+/* =========================
+   EMPTY STATE
+========================== */
+.marketplace-empty {
+    grid-column: 1 / -1;
+    background: var(--fl-white);
+    border-radius: var(--fl-radius);
+    box-shadow: var(--fl-shadow);
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.empty-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+}
+
+.marketplace-empty h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--fl-text);
+    margin: 0 0 0.5rem;
+}
+
+.marketplace-empty p {
+    color: var(--fl-muted);
+    margin: 0 0 1.5rem;
+}
+
+/* =========================
+   RESPONSIVE
+========================== */
+@media (max-width: 992px) {
+    .marketplace-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .marketplace-filters {
+        position: static;
+        width: auto;
+        padding: none;
+    }
+
+    .hidden {
+        display: none;
+    }
+
+    .hidden.show {
+        display: block;
+    }
+}
+
+@media (max-width: 576px) {
+    .marketplace-hero h1 {
+        font-size: 1.7rem;
+    }
+
+    .hero-search {
+        flex-direction: column;
+    }
+
+    .search-box input {
+        padding: 0.75rem 0;
+    }
+}

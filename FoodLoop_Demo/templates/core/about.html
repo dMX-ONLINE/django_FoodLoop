@@ -1,0 +1,329 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+FoodLoop - Rescue Food, Reduce Waste
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- =========================
+     PAGE HERO
+========================== -->
+<section class="about-hero">
+
+    <div class="container">
+
+        <span class="about-badge">🌱 About FoodLoop</span>
+
+        <h1>
+            We're on a mission to end
+            <span class="about-accent">food waste.</span>
+        </h1>
+
+        <p>
+            FoodLoop connects surplus food with the people who can use it —
+            turning potential waste into meals, savings and stronger communities.
+        </p>
+
+        <a href="{% url 'marketplace:marketplace' %}" class="btn btn-orange">
+            Explore the Marketplace
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     MISSION
+========================== -->
+<section class="section">
+
+    <div class="container mission-grid">
+
+        <div class="mission-text">
+
+            <span class="mission-label">Our Mission</span>
+
+            <h2>
+                Good food belongs on plates,
+                not in bins.
+            </h2>
+
+            <p>
+                Every year, tonnes of perfectly edible food are thrown away
+                while people in the same communities go without. FoodLoop was
+                built to close that gap — a simple platform where restaurants,
+                supermarkets, vendors and individuals can list surplus food,
+                and neighbours can reserve and collect it before it's wasted.
+            </p>
+
+            <p>
+                We believe rescuing food should be as easy as ordering it.
+                No complicated logistics, no middlemen — just local people
+                helping local people.
+            </p>
+
+        </div>
+
+        <div class="mission-cards">
+
+            <div class="mission-card">
+                <div class="mission-icon">🌍</div>
+                <h3>Environment First</h3>
+                <p>Every meal rescued means less methane from landfills and a smaller carbon footprint.</p>
+            </div>
+
+            <div class="mission-card">
+                <div class="mission-icon">🤝</div>
+                <h3>Community Driven</h3>
+                <p>Local providers, local rescuers — money and meals stay in the neighbourhood.</p>
+            </div>
+
+            <div class="mission-card">
+                <div class="mission-icon">💚</div>
+                <h3>Fair & Accessible</h3>
+                <p>Surplus food at fair prices — or free — for everyone, not just a lucky few.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     IMPACT NUMBERS
+========================== -->
+<section class="impact">
+
+    <div class="container">
+
+        <div class="section-heading light">
+            <h2>Our Impact So Far</h2>
+            <p>Small actions, multiplied by thousands of users.</p>
+        </div>
+
+        <div class="impact-grid">
+
+            <div class="impact-stat">
+                <strong>12,000+</strong>
+                <span>Meals Rescued</span>
+            </div>
+
+            <div class="impact-stat">
+                <strong>45t</strong>
+                <span>Food Waste Avoided</span>
+            </div>
+
+            <div class="impact-stat">
+                <strong>300+</strong>
+                <span>Food Providers</span>
+            </div>
+
+            <div class="impact-stat">
+                <strong>25+</strong>
+                <span>Communities Reached</span>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     VALUES
+========================== -->
+<section class="section">
+
+    <div class="container">
+
+        <div class="section-heading">
+            <h2>What We Stand For</h2>
+            <p>The values that guide everything we build.</p>
+        </div>
+
+        <div class="values-grid">
+
+            <div class="value-card">
+                <div class="value-icon">⚡</div>
+                <h3>Simplicity</h3>
+                <p>
+                    Listing or rescuing food takes less than a minute.
+                    If it's not simple, people won't do it.
+                </p>
+            </div>
+
+            <div class="value-card">
+                <div class="value-icon">🔍</div>
+                <h3>Transparency</h3>
+                <p>
+                    Clear listings, honest pricing, real reviews.
+                    You always know what you're getting.
+                </p>
+            </div>
+
+            <div class="value-card">
+                <div class="value-icon">🛡️</div>
+                <h3>Trust & Safety</h3>
+                <p>
+                    Ratings, pickup windows and verified profiles keep
+                    every exchange safe and reliable.
+                </p>
+            </div>
+
+            <div class="value-card">
+                <div class="value-icon">🌱</div>
+                <h3>Sustainability</h3>
+                <p>
+                    Every feature is designed with one question in mind:
+                    does this keep more food out of the bin?
+                </p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     STORY
+========================== -->
+<section class="section section-alt">
+
+    <div class="container story-grid">
+
+        <div class="story-visual">
+            <div class="story-bubble bubble-1">"Listed in 30 seconds!"</div>
+            <div class="story-bubble bubble-2">"Dinner rescued 🎉"</div>
+            <div class="story-bubble bubble-3">"Zero waste today ✊"</div>
+        </div>
+
+        <div class="story-text">
+
+            <span class="mission-label">Our Story</span>
+
+            <h2>
+                It started with one
+                unsold meal too many.
+            </h2>
+
+            <p>
+                FoodLoop began after watching a local bakery throw away
+                dozens of fresh loaves at closing time — while students
+                a street away were skipping meals to save money.
+            </p>
+
+            <p>
+                We realised the problem wasn't a lack of food, or a lack
+                of need. It was a lack of connection. So we built FoodLoop:
+                a marketplace where surplus food finds a home in minutes.
+            </p>
+
+            <p>
+                Today, hundreds of providers list food daily, and thousands
+                of rescuers pick it up — good food, fair prices, zero waste.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     TEAM
+========================== -->
+<section class="section">
+
+    <div class="container">
+
+        <div class="section-heading">
+            <h2>Meet the Team</h2>
+            <p>The people behind the loop.</p>
+        </div>
+
+        <div class="team-grid">
+
+            <div class="team-card">
+                <div class="team-avatar avatar-green">
+                    <img src="{% static 'image/team/Diego.jpg' %}" alt="Diego" class="team-photo">
+                </div>
+                <h3>Diego .O. Eziefuna</h3>
+                <span>Founder & CEO</span>
+                <p>Turned a late-night idea into a food rescue movement.</p>
+            </div>
+
+            <div class="team-card">
+                <div class="team-avatar avatar-orange">
+                    <img src="{% static 'image/team/bankey.jpeg' %}" alt="bankey" class="team-photo">
+                </div>
+                <h3>Lucky Daniel</h3>
+                <span>Lead Developer</span>
+                <p>Built the platform that makes rescuing food effortless.</p>
+            </div>
+
+            <div class="team-card">
+                <div class="team-avatar avatar-yellow">
+                    <img src="{% static 'image/team/favour.jpeg' %}" alt="Favour" class="team-photo">
+                </div>
+                <h3>Onyemulu Favour</h3>
+                <span>Community Lead</span>
+                <p>Grows the network of providers and rescuers city by city.</p>
+            </div>
+
+            <div class="team-card">
+                <div class="team-avatar avatar-green">
+                    <img src="{% static 'image/team/alex.jpeg' %}" alt="Alex" class="team-photo">
+                </div>
+                <h3>Abdulrahman Idow</h3>
+                <span>Operations</span>
+                <p>Keeps pickups smooth, safe and on schedule.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CTA
+========================== -->
+<section class="about-cta">
+
+    <div class="container cta-inner">
+
+        <h2>Be Part of the Solution</h2>
+
+        <p>
+            Whether you have surplus food or you're looking for a meal,
+            there's a place for you in the loop.
+        </p>
+
+        <div class="cta-actions">
+            <a href="{% url 'marketplace:offerfood' %}" class="btn btn-orange">
+                Offer Food
+            </a>
+            <a href="{% url 'marketplace:marketplace' %}" class="btn btn-ghost-light">
+                Find Food
+            </a>
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

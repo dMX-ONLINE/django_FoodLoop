@@ -1,0 +1,646 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    Marketplace - FoodLoop
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/marketplace.css' %}">
+{% endblock %}
+
+
+{% block content %}
+
+<section class="marketplace">
+
+    <!-- =========================
+         HERO HEADER
+    ========================== -->
+
+    <div class="marketplace-hero">
+
+        <div class="container">
+
+            <span class="hero-label">
+                🌱 FoodLoop Marketplace
+            </span>
+
+            <h1>
+                Find Surplus Food Near You
+            </h1>
+
+            <p>
+                Discover affordable surplus food and reserve it before it goes to waste.
+            </p>
+
+
+            <!-- SEARCH -->
+
+            <form method="GET" class="hero-search" id="foodSearchForm">
+
+                <div class="search-box">
+
+                    <span>🔍</span>
+
+                    <input
+                        type="search"
+                        name="q"
+                        id="foodSearch"
+                        placeholder="Search for food... e.g. jollof, bread, fruits"
+                        value="{{ request.GET.q }}"
+                    >
+
+                </div>
+
+                <button type="submit" class="btn btn-light">
+                    Search
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         MARKETPLACE BODY
+    ========================== -->
+
+    <div class="marketplace-body">
+
+        <div class="marketplace-layout">
+
+
+            <!-- =========================
+                 FILTER SIDEBAR
+            ========================== -->
+
+            <aside class="marketplace-filters">
+
+                <form method="GET" class="filters-form" id="foodFiltersForm">
+
+
+                    <div class="filter-header" id='filterOpen'>
+
+                        <h2>
+                            ⚙️ Filters
+                        </h2>
+
+                        <a href="{% url 'marketplace:marketplace' %}" class='hidden'>
+                            Clear all
+                        </a>
+
+                    </div>
+
+
+                    <!-- KEEP SEARCH TERM -->
+
+                    {% if request.GET.q %}
+
+                        <input
+                            type="hidden"
+                            name="q"
+                            value="{{ request.GET.q }}"
+                        >
+
+                    {% endif %}
+
+
+                    <!-- CATEGORY -->
+
+                    <div class='hidden'>
+                        <div class="filter-group" >
+
+                        <label for="category">
+                            Category
+                        </label>
+
+                        <select name="category" id="category">
+
+                            <option value="">
+                                All Categories
+                            </option>
+
+                            <option
+                                value="cooked"
+                                {% if request.GET.category == "cooked" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Cooked Meals
+                            </option>
+
+                            <option
+                                value="bakery"
+                                {% if request.GET.category == "bakery" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Bakery
+                            </option>
+
+                            <option
+                                value="produce"
+                                {% if request.GET.category == "produce" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Fresh Produce
+                            </option>
+
+                            <option
+                                value="beverages"
+                                {% if request.GET.category == "beverages" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Beverages
+                            </option>
+
+                            <option
+                                value="snacks"
+                                {% if request.GET.category == "snacks" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Snacks
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- LOCATION -->
+
+                    <div class="filter-group" >
+
+                        <label for="location">
+                            Location
+                        </label>
+
+                        <select name="location" id="location">
+
+                            <option value="">
+                                All Locations
+                            </option>
+
+                            <option
+                                value="ajah"
+                                {% if request.GET.location == "ajah" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Ajah
+                            </option>
+
+                            <option
+                                value="lekki"
+                                {% if request.GET.location == "lekki" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Lekki
+                            </option>
+
+                            <option
+                                value="yaba"
+                                {% if request.GET.location == "yaba" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Yaba
+                            </option>
+
+                            <option
+                                value="ikeja"
+                                {% if request.GET.location == "ikeja" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Ikeja
+                            </option>
+
+                            <option
+                                value="surulere"
+                                {% if request.GET.location == "surulere" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Surulere
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- MAXIMUM PRICE -->
+
+                    <div class="filter-group">
+
+                        <label for="max_price">
+                            Maximum Price
+                        </label>
+
+                        <div class="price-input">
+
+                            <span>₦</span>
+
+                            <input
+                                type="number"
+                                name="max_price"
+                                id="max_price"
+                                placeholder="5,000"
+                                min="0"
+                                value="{{ request.GET.max_price }}"
+                            >
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- EXPIRY -->
+
+                    <div class="filter-group" >
+
+                        <label for="expiry">
+                            Pickup / Expiry
+                        </label>
+
+                        <select name="expiry" id="expiry">
+
+                            <option value="">
+                                Any time
+                            </option>
+
+                            <option
+                                value="1"
+                                {% if request.GET.expiry == "1" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Within 1 hour
+                            </option>
+
+                            <option
+                                value="3"
+                                {% if request.GET.expiry == "3" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Within 3 hours
+                            </option>
+
+                            <option
+                                value="6"
+                                {% if request.GET.expiry == "6" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Within 6 hours
+                            </option>
+
+                            <option
+                                value="today"
+                                {% if request.GET.expiry == "today" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Today
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- SORT -->
+
+                    <div class="filter-group">
+
+                        <label for="sort">
+                            Sort by
+                        </label>
+
+                        <select name="sort" id="sort">
+
+                            <option value="">
+                                Default
+                            </option>
+
+                            <option
+                                value="newest"
+                                {% if request.GET.sort == "newest" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Newest
+                            </option>
+
+                            <option
+                                value="price_low"
+                                {% if request.GET.sort == "price_low" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Price: Low to High
+                            </option>
+
+                            <option
+                                value="price_high"
+                                {% if request.GET.sort == "price_high" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Price: High to Low
+                            </option>
+
+                            <option
+                                value="expiry"
+                                {% if request.GET.sort == "expiry" %}
+                                    selected
+                                {% endif %}
+                            >
+                                Expiring Soon
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary filter-button"
+                       
+                    >
+                        Apply Filters
+                    </button>
+
+                    </div>
+
+
+
+                </form>
+
+            </aside>
+
+
+            <!-- =========================
+                 RESULTS
+            ========================== -->
+
+            <section class="marketplace-results">
+
+
+                <div class="results-header">
+
+                    <div>
+
+                        <h2>
+                            Available Food
+                        </h2>
+
+                        <p id="foodCount">
+                            {{ foods|length }}
+                            food listing{{ foods|length|pluralize }}
+                            found
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- FOOD GRID -->
+
+                <div class="marketplace-grid" id="foodGrid">
+
+
+                    {% for food in foods %}
+
+                    <article
+                        class="marketplace-card"
+                        data-category="{{ food.category|default:''|lower }}"
+                        data-location="{{ food.location.address|default:'' }} {{ food.location.city|default:'' }} {{ food.location.state|default:'' }} {{ food.location.country|default:'' }}"
+                        data-price="{{ food.price }}"
+                        data-expiry="{{ food.expiry_time|date:'c' }}"
+                        data-created="{{ food.created_at|date:'c' }}"
+                    >
+                        <!-- FOOD IMAGE -->
+
+                        <div class="food-card-image">
+
+                            {% if food.image %}
+
+                                <img
+                                    src="{{ food.image.url }}"
+                                    alt="{{ food.title }}"
+                                >
+
+                            {% else %}
+
+                                <div class="food-placeholder">
+                                    🍱
+                                </div>
+
+                            {% endif %}
+
+
+                            <span class="food-category-badge">
+                                {{ food.category }}
+                            </span>
+
+                        </div>
+
+
+                        <!-- FOOD BODY -->
+
+                        <div class="food-card-body">
+
+
+                            <h3>
+                                {{ food.title }}
+                            </h3>
+
+
+                            <p class="food-description">
+
+                                {{ food.description|truncatewords:12 }}
+
+                            </p>
+
+
+                            <!-- PROVIDER -->
+
+                            <div class="food-provider">
+
+                                <div class="profile-avatar">
+                                    {% if food.provider.profile.avatar %}
+                                        <img
+                                            src="{{ food.provider.profile.avatar.url }}"
+                                            alt="{{ food.provider.username }}'s profile picture"
+                                        >
+                                    {% else %}
+                                        <span>
+                                            {{ food.provider.username|first|upper }}
+                                        </span>
+                                    {% endif %}
+                                </div>
+                                <div class="provider-meta">
+
+                                    <strong>
+                                        {{ food.provider }}
+                                    </strong>
+
+                                    {% if food.total_reviews > 0 %}
+                                        <span class="rating-stars">★</span>
+                                        <strong>{{ food.average_rating|floatformat:1 }}</strong>
+                                        <span class="rating-count">
+                                            ({{ food.total_reviews }} reviews)
+                                        </span>
+                                    {% else %}
+                                        <span class="no-rating">No reviews yet</span>
+                                    {% endif %}
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- FOOD INFORMATION -->
+
+                            <div class="food-card-info">
+
+
+                                <!-- LOCATION -->
+
+                                <div>
+
+                                    <span>📍</span>
+
+                                    <p>
+                                        {{ food.location}}
+                                    </p>
+
+                                </div>
+
+
+                                <!-- QUANTITY -->
+
+                                <div>
+
+                                    <span>📦</span>
+
+                                    <p>
+                                        {{ food.quantity }}
+                                        available
+                                    </p>
+
+                                </div>
+
+
+                                <!-- EXPIRY -->
+
+                                <div>
+
+                                    <span>⏰</span>
+
+                                    <p>
+                                        {{ food.expiry_time|date:"M d, Y" }}
+                                        -
+                                        {{ food.expiry_time|time:"g:i A" }}
+                                    </p>
+
+                                </div>
+
+
+                            </div>
+
+
+                            <!-- FOOTER -->
+
+                            <div class="food-card-footer">
+
+
+                                <div class="food-price">
+
+                                    <span>
+                                        Price
+                                    </span>
+
+                                    <strong>
+                                        ₦{{ food.price }}
+                                    </strong>
+
+                                </div>
+
+
+                                <!-- IMPORTANT:
+                                     Pass the food ID -->
+
+                                <a
+                                    href="{% url 'marketplace:viewfood' food.id %}"
+                                    class="btn btn-primary btn-view"
+                                >
+                                    View Food
+                                </a>
+
+
+                            </div>
+
+
+                        </div>
+
+                    </article>
+
+
+                    {% empty %}
+
+
+                    <!-- EMPTY STATE -->
+
+                    <div class="marketplace-empty">
+
+                        <div class="empty-icon">
+                            🍽️
+                        </div>
+
+                        <h2>
+                            No food found
+                        </h2>
+
+                        <p>
+                            Try changing your search or filters
+                            to find available surplus food.
+                        </p>
+
+                        <a
+                            href="{% url 'marketplace:marketplace' %}"
+                            class="btn btn-outline"
+                        >
+                            Clear Filters
+                        </a>
+
+                    </div>
+
+
+                    {% endfor %}
+
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
+

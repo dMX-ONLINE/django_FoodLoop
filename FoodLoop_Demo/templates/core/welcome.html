@@ -1,0 +1,130 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        {% block title %}
+            FoodLoop
+        {% endblock %}
+    </title>
+
+    <!-- FoodLoop CSS -->
+    <link rel="stylesheet" href="{% static 'css/welcome.css' %}">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+
+    {% block extra_css %}
+    {% endblock %}
+
+</head>
+
+<body>
+
+
+<!-- =========================
+     NAVBAR
+     ========================= -->
+<nav class="foodloop-navbar">
+
+    <div class="container">
+
+        <!-- Logo -->
+        <a href="{% url 'core:index' %}"
+            class="foodloop-logo">
+            <span class="logo-icon">
+                <i class="fas fa-leaf"></i>
+            </span>
+            Food<span>Loop</span>
+        </a>
+
+
+
+        <!-- Navigation -->
+        <ul class="foodloop-nav" id="foodloopNav">
+
+            <li>
+                <a class="btn-foodloop" href="{% url 'accounts:signup' %}">
+                    Get Started <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+
+</nav>
+
+<section class="hero">
+
+    <div class="container hero-grid">
+
+        <div class="hero-text">
+
+            <span class="hero-badge">🌱 Reduce Food Waste</span>
+
+            <h1>
+                Good Food Should
+                <span class="hero-accent">Never Go to Waste.</span>
+            </h1>
+
+            <p class="hero-lead">
+                FoodLoop connects restaurants, supermarkets, food vendors
+                and individuals with people who can use their surplus food.
+            </p>
+
+            {% if user.is_authenticated %}
+                <div class="hero-actions">
+                    <a href="{% url 'marketplace:marketplace' %}" class="btn btn-orange">
+                        Find Available Food
+                    </a>
+                    <a href="{% url 'marketplace:offerfood' %}" class="btn btn-ghost-light">
+                        Offer Surplus Food
+                    </a>
+                </div>
+            {% else %}
+                <div class="hero-actions">
+                    <a href="{% url 'accounts:signup' %}" class="btn btn-orange">
+                        Get Started
+                    </a>
+                </div>
+            {% endif %}
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <strong>12k+</strong>
+                    <span>Meals Rescued</span>
+                </div>
+                <div class="hero-stat">
+                    <strong>300+</strong>
+                    <span>Providers</span>
+                </div>
+                <div class="hero-stat">
+                    <strong>45t</strong>
+                    <span>Waste Avoided</span>w
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- Hero visual card -->
+        <div class="hero-visual">
+
+            <div class="hero-card">
+
+                <img src="{% static 'image/badge.png' %}" alt="Surplus food ready to be rescued" class="hero-card-image">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>

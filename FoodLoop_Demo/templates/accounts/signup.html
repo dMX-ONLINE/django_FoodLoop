@@ -1,0 +1,340 @@
+{% load static %}
+
+{% block extra_css %}
+
+<link
+    rel="stylesheet"
+    href="{% static 'css/auth.css' %}"
+>
+
+{% endblock %}
+
+
+{% block content %}
+
+<section class="auth-page">
+
+    <div class="auth-container">
+
+        <!-- =========================
+             SIGNUP CARD
+        ========================== -->
+
+        <div class="auth-card">
+
+
+            <!-- LOGO -->
+
+            <a
+                href="{% url 'core:index' %}"
+                class="auth-logo"
+            >
+                Food<span>Loop</span>
+            </a>
+
+
+            <!-- HEADER -->
+
+            <div class="auth-header">
+
+                <h1>
+                    Create Your Account
+                </h1>
+
+                <p>
+                    Join FoodLoop and help reduce food waste.
+                </p>
+
+            </div>
+
+
+            <!-- SIGNUP FORM -->
+
+            <form
+                method="POST"
+                class="auth-form"
+            >
+
+                {% csrf_token %}
+                {% if form.errors %}
+                    <div class="auth-error" role="alert">
+                        <p>Please correct the following errors:</p>
+                    
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <p>{{ field.label }}: {{ error }}</p>
+                            {% endfor %}
+                        {% endfor %}
+                    
+                        {% for error in form.non_field_errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <!-- NAME -->
+
+                <div class="auth-form-row">
+
+
+                    <div class="auth-form-group">
+
+                        <label for="first_name">
+                            First Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="first_name"
+                            name="first_name"
+                            placeholder="First name"
+                            value="{{ form.first_name.value|default:'' }}"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="auth-form-group">
+
+                        <label for="last_name">
+                            Last Name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="last_name"
+                            name="last_name"
+                            placeholder="Last name"
+                            value="{{ form.last_name.value|default:'' }}"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- USERNAME -->
+
+                <div class="auth-form-group">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Choose a username"
+                        value="{{ form.usernamename.value|default:'' }}"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="auth-form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        value="{{ form.email.value|default:'' }}"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PHONE -->
+
+                <div class="auth-form-group">
+
+                    <label for="phone">
+                        Phone Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        name="phone_number"
+                        value="{{ form.phone_number.value|default:'' }}"
+                        placeholder="e.g. 08012345678"
+                    >
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="auth-form-group">
+
+                    <label for="password1">
+                        Password
+                    </label>
+
+                    <div class="password-input">
+
+                        <input
+                            type="password"
+                            id="password1"
+                            name="password1"
+                            placeholder="Create a password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            onclick="togglePassword('password1', this)"
+                        >
+                            Show
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CONFIRM PASSWORD -->
+
+                <div class="auth-form-group">
+
+                    <label for="password2">
+                        Confirm Password
+                    </label>
+
+                    <div class="password-input">
+
+                        <input
+                            type="password"
+                            id="password2"
+                            name="password2"
+                            placeholder="Confirm your password"
+                            required
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            onclick="togglePassword('password2', this)"
+                        >
+                            Show
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- TERMS -->
+
+                <div class="terms-checkbox">
+
+                    <label>
+
+                        <input
+                            type="checkbox"
+                            name="terms"
+                            required
+                        >
+
+                        <span>
+                            I agree to the FoodLoop terms and
+                            conditions.
+                        </span>
+
+                    </label>
+
+                </div>
+
+
+                <!-- BUTTON -->
+
+                <button
+                    type="submit"
+                    class="auth-submit"
+                >
+                    Create Account
+                </button>
+
+            </form>
+
+
+            <!-- LOGIN -->
+
+            <div class="auth-switch">
+
+                <p>
+
+                    Already have an account?
+
+                    <a href="{% url 'accounts:login' %}">
+                        Login
+                    </a>
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- SIDE MESSAGE -->
+
+        <div class="auth-info">
+
+            <span class="auth-info-icon">
+                🍱
+            </span>
+
+            <h2>
+                One account. Two ways to use FoodLoop.
+            </h2>
+
+            <p>
+                Find affordable surplus food or offer
+                your own surplus food to someone who
+                can use it.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<script>
+
+function togglePassword(inputId, button) {
+
+    const input = document.getElementById(inputId);
+
+    if (input.type === "password") {
+
+        input.type = "text";
+        button.textContent = "Hide";
+
+    } else {
+
+        input.type = "password";
+        button.textContent = "Show";
+
+    }
+
+}
+
+</script>
+
+{% endblock %}
+
